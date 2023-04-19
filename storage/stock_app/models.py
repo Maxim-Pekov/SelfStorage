@@ -34,9 +34,14 @@ class Tariff(models.Model):
 class Storage(models.Model):
     title = models.CharField('Склад', max_length=100)
     address = models.CharField('Адрес', max_length=200)
+    image = models.ImageField('Фото')
 
     class Meta:
         verbose_name = 'Склад'
+        verbose_name_plural = 'Склады'
+
+    def __str__(self):
+        return self.address
 
 
 class Order(models.Model):

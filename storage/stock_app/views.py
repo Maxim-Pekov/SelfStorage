@@ -1,4 +1,5 @@
 from django.shortcuts import render
+from stock_app.models import Storage
 
 
 def index(request):
@@ -6,7 +7,11 @@ def index(request):
 
 
 def rent_boxes(request):
-    return render(request, 'boxes.html')
+    boxes = Storage.objects.all()
+    context = {
+        'boxes': boxes
+    }
+    return render(request, 'boxes.html', context=context)
 
 
 def show_faq(request):

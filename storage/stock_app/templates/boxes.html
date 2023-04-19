@@ -77,15 +77,16 @@
 		<h6 class="text-center SelfStorage_grey">Арендуйте склад индивидуального хранения по уникальной цене прямо сейчас</h6>
 		<a href="#BOX" id="toBox" class="d-none"></a>
 		<ul class="nav nav-pills mb-3 d-flex justify-content-between" id="boxes-links" role="tablist">
+			{% for box in boxes %}
 			<li class="nav-item flex-grow-1 mx-2" role="presentation">
 				<a href="#BOX" class="row text-decoration-none py-3 px-4 mt-5 SelfStorage__boxlink" id="pills-Moscow-tab" data-bs-toggle="pill" data-bs-target="#pills-Moscow" role="tab" aria-controls="pills-Moscow" aria-selected="true">
 					<div class="col-12 col-lg-3 d-flex justify-content-center">
-						<img src="{% static 'img/image11.png' %}" alt=""
+						<img src="{{ box.image.url }}" alt=""
 							 class="mb-3 mb-lg-0">
 					</div>
 					<div class="col-12 col-md-4 col-lg-3 d-flex flex-column justify-content-center">
-						<h4 class="text-center">Москва</h4>
-						<h6 class="text-center">ул. Рокотова, д. 15</h6>
+						<h4 class="text-center">{{ box.title }}</h4>
+						<h6 class="text-center">{{ box.address }}</h6>
 					</div>
 					<div class="col-12 col-md-4 col-lg-3 d-flex flex-column justify-content-center">
 						<h4 class="text-center">14  из 390</h4>
@@ -97,85 +98,8 @@
 					</div>
 				</a>
 			</li>
-			<li class="nav-item flex-grow-1 mx-2" role="presentation">
-				<a href="#BOX" class="row text-decoration-none py-3 px-4 mt-5 SelfStorage__boxlink" id="pills-Odintsovo-tab" data-bs-toggle="pill" data-bs-target="#pills-Odintsovo" role="tab" aria-controls="pills-Odintsovo" aria-selected="true">
-					<div class="col-12 col-lg-3 d-flex justify-content-center">
-						<img src="{% static 'img/image9.png' %}" alt="" class="mb-3 mb-lg-0">
-					</div>
-					<div class="col-12 col-md-4 col-lg-3 d-flex flex-column justify-content-center">
-						<h4 class="text-center">Одинцово</h4>
-						<h6 class="text-center">ул. Северная, д. 36</h6>
-					</div>
-					<div class="col-12 col-md-4 col-lg-3 d-flex flex-column justify-content-center">
-						<h4 class="text-center">160  из 258</h4>
-						<h6 class="text-center">Боксов свободно</h6>
-					</div>
-					<div class="col-12 col-md-4 col-lg-3 d-flex flex-column justify-content-center">
-						<h4 class="text-center SelfStorage_green">от 2264 ₽</h4>
-						<h6 class="text-center">Парковка</h6>
-					</div>
-				</a>
-			</li>
-			<li class="nav-item flex-grow-1 mx-2" role="presentation">
-				<a href="#BOX" class="row text-decoration-none py-3 px-4 mt-5 SelfStorage__boxlink" id="pills-Pushkino-tab" data-bs-toggle="pill" data-bs-target="#pills-Pushkino" role="tab" aria-controls="pills-Pushkino" aria-selected="true">
-					<div class="col-12 col-lg-3 d-flex justify-content-center">
-						<img src="{% static 'img/image15.png' %}" alt=""
-							 class="mb-3 mb-lg-0">
-					</div>
-					<div class="col-12 col-md-4 col-lg-3 d-flex flex-column justify-content-center">
-						<h4 class="text-center">Пушкино</h4>
-						<h6 class="text-center">ул. Строителей, д. 5</h6>
-					</div>
-					<div class="col-12 col-md-4 col-lg-3 d-flex flex-column justify-content-center">
-						<h4 class="text-center">58  из 361</h4>
-						<h6 class="text-center">Боксов свободно</h6>
-					</div>
-					<div class="col-12 col-md-4 col-lg-3 d-flex flex-column justify-content-center">
-						<h4 class="text-center SelfStorage_green">от 2154 ₽</h4>
-						<h6 class="text-center">Высокие потолки</h6>
-					</div>
-				</a>
-			</li>
-			<li class="nav-item flex-grow-1 mx-2" role="presentation">
-				<a href="#BOX" class="row text-decoration-none py-3 px-4 mt-5 SelfStorage__boxlink" id="pills-Lubertsi-tab" data-bs-toggle="pill" data-bs-target="#pills-Lubertsi" role="tab" aria-controls="pills-Lubertsi" aria-selected="true">
-					<div class="col-12 col-lg-3 d-flex justify-content-center">
-						<img src="{% static 'img/image151.png' %}" alt=""
-							 class="mb-3 mb-lg-0">
-					</div>
-					<div class="col-12 col-md-4 col-lg-3 d-flex flex-column justify-content-center">
-						<h4 class="text-center">Люберцы</h4>
-						<h6 class="text-center">ул. Советская, д. 88</h6>
-					</div>
-					<div class="col-12 col-md-4 col-lg-3 d-flex flex-column justify-content-center">
-						<h4 class="text-center">4  из 130</h4>
-						<h6 class="text-center">Боксов свободно</h6>
-					</div>
-					<div class="col-12 col-md-4 col-lg-3 d-flex flex-column justify-content-center">
-						<h4 class="text-center SelfStorage_green">от 1408 ₽</h4>
-						<h6 class="text-center SelfStorage_orange">Осталось мало боксов</h6>
-					</div>
-				</a>
-			</li>
-			<li class="nav-item flex-grow-1 mx-2" role="presentation">
-				<a href="#BOX" class="row text-decoration-none py-3 px-4 mt-5 SelfStorage__boxlink" id="pills-Domodedovo-tab" data-bs-toggle="pill" data-bs-target="#pills-Domodedovo" role="tab" aria-controls="pills-Domodedovo" aria-selected="true">
-					<div class="col-12 col-lg-3 d-flex justify-content-center">
-						<img src="{% static 'img/image16.png' %}" alt=""
-							 class="mb-3 mb-lg-0">
-					</div>
-					<div class="col-12 col-md-4 col-lg-3 d-flex flex-column justify-content-center">
-						<h4 class="text-center">Домодедово</h4>
-						<h6 class="text-center">ул. Орджоникидзе, д. 29</h6>
-					</div>
-					<div class="col-12 col-md-4 col-lg-3 d-flex flex-column justify-content-center">
-						<h4 class="text-center">56  из 234</h4>
-						<h6 class="text-center">Боксов свободно</h6>
-					</div>
-					<div class="col-12 col-md-4 col-lg-3 d-flex flex-column justify-content-center">
-						<h4 class="text-center SelfStorage_green">от 2988 ₽</h4>
-						<h6 class="text-center">Большие боксы</h6>
-					</div>
-				</a>
-			</li>
+			{% endfor %}
+
 		</ul>
 		<script>
 			document.getElementById('pills-Moscow-tab').addEventListener('click', () => {

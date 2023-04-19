@@ -1,0 +1,46 @@
+{% load static %}
+<header class="navbar navbar-expand-xxl navbar-light fixed-top bg-white py-5">
+	<nav class="container">
+		<button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbar" aria-controls="navbar" aria-expanded="false" aria-label="Toggle navigation">
+			<span class="navbar-toggler-icon"></span>
+		</button>
+		<a class="navbar-brand" href="#">
+			<img src="{% static 'img/Vector.svg' %}" alt="[]">
+			<img src="{% static 'img/SelfStorage.svg' %}" alt="SelfStorage">
+		</a>
+		<div class="collapse navbar-collapse justify-content-end" id="navbar">
+			<ul class="navbar-nav">
+				<li class="nav-item d-flex align-items-center me-5">
+					<div class="d-flex justify-content-center align-items-center rounded-pill SelfStorage__bg_green me-2" style="height: 36px; width: 36px;">
+						<svg xmlns="http://www.w3.org/2000/svg" width="13" height="13" fill="white" class="bi bi-telephone-fill" viewBox="0 0 16 16">
+							<path fill-rule="evenodd" d="M1.885.511a1.745 1.745 0 0 1 2.61.163L6.29 2.98c.329.423.445.974.315 1.494l-.547 2.19a.678.678 0 0 0 .178.643l2.457 2.457a.678.678 0 0 0 .644.178l2.189-.547a1.745 1.745 0 0 1 1.494.315l2.306 1.794c.829.645.905 1.87.163 2.611l-1.034 1.034c-.74.74-1.846 1.065-2.877.702a18.634 18.634 0 0 1-7.01-4.42 18.634 18.634 0 0 1-4.42-7.009c-.362-1.03-.037-2.137.703-2.877L1.885.511z"/>
+						</svg>
+					</div>
+					<b>8 (800) 000-00-00</b>
+				</li>
+				<li class="nav-item me-5">
+					<a class="nav-link SelfStorage_black" href="#">Рассчитать стоимость</a>
+				</li>
+				<li class="nav-item me-5">
+					<a class="nav-link SelfStorage_black" href="{% url 'faq' %}">Правила хранения</a>
+				</li>
+				<li class="nav-item me-5">
+					<a class="nav-link SelfStorage_black" href="{% url 'boxes' %}">Арендовать бокс</a>
+				</li>
+				<li class="nav-item d-flex align-items-center me-5">
+					<a href="#" class="me-2 mb-1">
+						<svg xmlns="http://www.w3.org/2000/svg" width="22" height="22" fill="#F28A4F" class="bi bi-bell" viewBox="0 0 16 16">
+							<path d="M8 16a2 2 0 0 0 2-2H6a2 2 0 0 0 2 2zM8 1.918l-.797.161A4.002 4.002 0 0 0 4 6c0 .628-.134 2.197-.459 3.742-.16.767-.376 1.566-.663 2.258h10.244c-.287-.692-.502-1.49-.663-2.258C12.134 8.197 12 6.628 12 6a4.002 4.002 0 0 0-3.203-3.92L8 1.917zM14.22 12c.223.447.481.801.78 1H1c.299-.199.557-.553.78-1C2.68 10.2 3 6.88 3 6c0-2.42 1.72-4.44 4.005-4.901a1 1 0 1 1 1.99 0A5.002 5.002 0 0 1 13 6c0 .88.32 4.2 1.22 6z"/>
+						</svg>
+					</a>
+					<a href="#" class="text-decoration-none d-flex align-items-center">
+						<svg xmlns="http://www.w3.org/2000/svg" width="22" height="22" fill="#579586" class="bi bi-person border border-2 rounded-pill" viewBox="0 0 16 16">
+							<path d="M8 8a3 3 0 1 0 0-6 3 3 0 0 0 0 6zm2-3a2 2 0 1 1-4 0 2 2 0 0 1 4 0zm4 8c0 1-1 1-1 1H3s-1 0-1-1 1-4 6-4 6 3 6 4zm-1-.004c-.001-.246-.154-.986-.832-1.664C11.516 10.68 10.289 10 8 10c-2.29 0-3.516.68-4.168 1.332-.678.678-.83 1.418-.832 1.664h10z"/>
+						</svg>
+						<span class="SelfStorage_green">Екатерина</span>
+					</a>
+				</li>
+			</ul>
+		</div>
+	</nav>
+</header>

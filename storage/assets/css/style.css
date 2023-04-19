@@ -1,0 +1,153 @@
+
+@import url('https://fonts.googleapis.com/css2?family=Commissioner:wght@200;300;400;600;700;800;900&display=swap');
+
+html {
+    height: 100%;
+}
+* {
+    font-family: 'Commissioner', sans-serif;
+    font-size: 16px;
+    font-weight: normal;
+    color: #353940;
+}
+body {
+    background-color: white;
+    min-height: 100%;
+    display: grid;
+    grid-template-rows: auto 1fr auto;
+}
+.fs_24 {
+    font-size: 24px;
+}
+.fs_30 {
+    font-size: 30px;
+}
+.border-8 {
+    border-radius: 8px;
+}
+.SelfStorage__btn2_orange:hover {
+    background-color: white!important;
+    color: #F28A4F!important;
+    border-color: #F28A4F!important;
+}
+
+.SelfStorage__btn2_green:hover {
+    background-color: white!important;
+    color: #579586!important;
+    border-color: #579586!important;
+}
+.SelfStorage__btn_orange:hover {
+    background-color: #F28A4F!important;
+    color: white!important;
+    border-color: white!important;
+}
+.SelfStorage__btn_green:hover {
+    background-color: #579586!important;
+    color: white!important;
+    border-color: white!important;
+}
+.SelfStorage_radio ~ label {
+    border-radius: 8px;
+    border: 2px white solid;
+    color: #89939E;
+}
+.SelfStorage__tab {
+    box-shadow: none!important;
+    border-radius: 8px;
+    border: 2px white solid;
+    color: #89939E;
+}
+.SelfStorage__tab:hover {
+    border-radius: 8px;
+    border: 2px #579586 solid;
+    color: #579586;
+}
+.SelfStorage__tab.active {
+    border-radius: 8px;
+    border: 2px #579586 solid;
+    background-color: #579586;
+    color: white;
+}
+.SelfStorage_radio ~ label:hover {
+    border-radius: 8px;
+    border: 2px #579586 solid;
+    color: #579586;
+}
+.SelfStorage_radio:checked ~ label {
+    border-radius: 8px;
+    border: 2px #579586 solid;
+    background-color: #579586;
+    color: white;
+}
+.SelfStorage__input:read-only {
+    border-color: white;
+    background-color: white;
+}
+.SelfStorage_tab.active {
+    color: #579586 !important;
+}
+.SelfStorage__boxlink {
+    border-radius: 8px;
+    border: solid 2px white;
+}
+.SelfStorage__boxlink:hover {
+    border: solid 2px #579586;
+}
+.SelfStorage_tab:hover {
+    color: #579586 !important;
+}
+.SelfStorage__img {
+    background-image: url(./../img/image.png);
+    background-repeat: no-repeat;
+    background-position: center;
+}
+.SelfStorage__img2 {
+    background-image: url(./../img/image2.png);
+    background-repeat: no-repeat;
+    background-position: center;
+    background-size: contain;
+}
+.SelfStorage__card {
+    width: 395px;
+    height: 395px;
+    border-radius: 10px;
+}
+.SelfStorage_green {
+    color: #579586 !important;
+}
+.SelfStorage__bg_green {
+    background-color: #579586 !important;
+ }
+.SelfStorage_lightgrey {
+    color: #ECEDEF !important;
+}
+.SelfStorage__bg_lightgrey {
+    background-color: #ECEDEF !important;
+}
+.SelfStorage_grey {
+    color: #89939E !important;
+}
+.SelfStorage__bg_grey {
+    background-color: #89939E !important;
+}
+ .SelfStorage_black {
+     color: #353940 !important;
+ }
+.SelfStorage_orange {
+    color: #F28A4F !important;
+}
+.SelfStorage__bg_orange {
+    background-color: #F28A4F !important;
+}
+.mt-header {
+    margin-top: calc(136px + 1.6rem);
+}
+.pt-header {
+    padding-top: calc(136px + 1.6rem);
+}
+.SelfStorage__input {
+
+}
+.z-index-1 {
+    z-index: -1;
+}

@@ -1,0 +1,68 @@
+{% extends 'base.html' %}
+{% load static %}
+{% block title %}Storage-rent-empty{% endblock %}
+{% block content %}
+{% include 'include/navbarbox.html' %}
+<main class="container mt-header">
+	<div class="row" role="tablist">
+		<div class="col-lg-3 d-flex flex-column nav nav-pills">
+			<button class="ps-0 btn bg-white fs_24 shadow-none SelfStorage_orange SelfStorage_tab active" id="LK-tab" data-bs-toggle="pill" data-bs-target="#LK" type="button" role="tab" aria-controls="LK" aria-selected="true">Личный кабинет</button>
+			<button class="ps-0 btn bg-white fs_24 shadow-none SelfStorage_grey SelfStorage_tab" id="Rent-tab" data-bs-toggle="pill" data-bs-target="#Rent" type="button" role="tab" aria-controls="Rent" aria-selected="false">Моя аренда</button>
+			<a href="./faq.html" class="btn fs_24 shadow-none text-decoration-none SelfStorage_grey SelfStorage_tab">FAQ</a>
+			<a href="#" class="btn fs_24 shadow-none text-decoration-none SelfStorage_grey SelfStorage_tab">Выйти</a>
+		</div>
+		<div class="col-lg-9">
+			<div class="card tab-content p-5">
+				<div class="tab-pane fade show active" id="LK" role="tabpanel" aria-labelledby="LK-tab">
+					<div class="row">
+						<div class="col-12 col-sm-5 d-flex flex-column align-items-center">
+							<img src="{% static 'img/image10.png' %}" class="rounded-pill mb-3" alt="">
+							<h4>Екатерина Иванова</h4>
+						</div>
+						<div class="col-12 col-sm-7 d-flex flex-column">
+							<form>
+								<label class="fs_24 SelfStorage_green ms-2" for="EMAIL">E-mail</label>
+								<input type="email" name="EMAIL_EDIT" id="EMAIL" class="form-control fs_24 ps-2 SelfStorage__input" value="ekatyusha89@yandex.ru" disabled>
+								<label class="fs_24 SelfStorage_green ms-2" for="PHONE">Телефон</label>
+								<input type="tel" name="PHONE_EDIT" id="PHONE" class="form-control fs_24 ps-2 SelfStorage__input" value="+7-909-000-00-00" disabled>
+								<label class="fs_24 SelfStorage_green ms-2" for="PASSWORD">Пароль</label>
+								<input type="password" name="PASSWORD_EDIT" id="PASSWORD" class="form-control fs_24 ps-2 SelfStorage__input" value="111111111" disabled>
+								<button type="submit" class="btn SelfStorage_green ps-1" id="save" style="display: none">Сохранить</button>
+								<a type="button" class="btn SelfStorage_orange ps-1" id="edit">Редактировать</a>
+								<script>
+									document.getElementById('edit').addEventListener('click', e => {
+										e.preventDefault()
+										document.getElementById('EMAIL').disabled = false
+										document.getElementById('PHONE').disabled = false
+										document.getElementById('PASSWORD').disabled = false
+										document.getElementById('PASSWORD').type = 'text'
+										document.getElementById('edit').style.display = 'none'
+										document.getElementById('save').style.display = 'inline-block'
+									})
+									document.getElementById('save').addEventListener('click', () => {
+										setTimeout(() => {
+											document.getElementById('EMAIL').disabled = true
+											document.getElementById('PHONE').disabled = true
+											document.getElementById('PASSWORD').disabled = true
+											document.getElementById('PASSWORD').type = 'password'
+											document.getElementById('edit').style.display = 'inline-block'
+											document.getElementById('save').style.display = 'none'
+										}, 0)
+									})
+								</script>
+							</form>
+						</div>
+					</div>
+				</div>
+				<div class="tab-pane fade" id="Rent" role="tabpanel" aria-labelledby="Rent-tab">
+					<h1 class="fw-bold SelfStorage_green">Добрый день, Екатерина!</h1>
+					<h4 class="SelfStorage_grey my-5">У вас еще нет аренды :(<br>Но вы можете арендовать свой первый бокс  по  привлекательной цене прямо сейчас</h4>
+					<div><button class="btn fs_24 px-5 py-3 text-white border-8 SelfStorage__bg_orange SelfStorage__btn2_orange mb-3">Арендовать бокс</button></div>
+					<a href="#" class="SelfStorage_orange">Нужна помощь?</a>
+				</div>
+			</div>
+		</div>
+	</div>
+</main>
+<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/js/bootstrap.bundle.min.js" integrity="sha384-MrcW6ZMFYlzcLA8Nl+NtUVF0sA7MsXsP1UyJoMp4YLEuNSfAP+JcXn/tWtIaxVXM" crossorigin="anonymous"></script>
+{% endblock %}

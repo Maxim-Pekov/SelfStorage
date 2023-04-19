@@ -1,0 +1,235 @@
+{% extends 'base.html' %}
+{% load static %}
+{% block title %}Storage-faq{% endblock %}
+{% block content %}
+{% include 'include/navbarbox.html' %}
+<main class="container mt-header">
+	<div class="row" role="tablist">
+		<div class="col-lg-3 d-flex flex-column nav nav-pills">
+			<button class="ps-0 btn bg-white fs_24 shadow-none SelfStorage_grey SelfStorage_tab active" id="LK-tab" data-bs-toggle="pill" data-bs-target="#LK" type="button" role="tab" aria-controls="LK" aria-selected="true">О складах и боксах</button>
+			<button class="ps-0 btn bg-white fs_24 shadow-none SelfStorage_grey SelfStorage_tab" id="Rent-tab" data-bs-toggle="pill" data-bs-target="#Rent" type="button" role="tab" aria-controls="Rent" aria-selected="false">Доступ к складам и боксам</button>
+			<button class="ps-0 btn bg-white fs_24 shadow-none SelfStorage_grey SelfStorage_tab" id="FAQ-tab" data-bs-toggle="pill" data-bs-target="#FAQ" type="button" role="tab" aria-controls="FAQ" aria-selected="false">Договор аренды и оплата</button>
+		</div>
+		<div class="col-lg-9">
+			<div class="card tab-content p-5">
+				<div class="tab-pane fade show active" id="LK" role="tabpanel" aria-labelledby="LK-tab">
+					<h2 class="fw-bold">О складах и боксах</h2>
+					<p><a class="fs_24 SelfStorage_grey text-decoration-none" data-bs-toggle="collapse" href="#collapse11" role="button" aria-expanded="false" aria-controls="collapseExample">
+							Как устроены склады индивидуального хранения SelfStorage?
+					</a></p>
+					<div class="collapse" id="collapse11">
+						<span>Каждый склад сети SelfStorage – это отапливаемое и сухое помещение, оборудованное боксами различных размеров, которые вы можете арендовать для хранения вещей на любой срок от 1 месяца.</span>
+					</div>
+					<p><a class="fs_24 SelfStorage_grey text-decoration-none" data-bs-toggle="collapse" href="#collapse12" role="button" aria-expanded="false" aria-controls="collapseExample">
+						Какие условия хранения поддерживаются в складах SelfStorage?
+					</a></p>
+					<div class="collapse" id="collapse12">
+						<span>Во всех филиалах Кладовкин регулярно проводится уборка помещений, а также поддерживается постоянная температура и уровень влажности.</span>
+					</div>
+					<p><a class="fs_24 SelfStorage_grey text-decoration-none" data-bs-toggle="collapse" href="#collapse13" role="button" aria-expanded="false" aria-controls="collapseExample">
+						Какие меры безопасности соблюдаются в складах SelfStorage?
+					</a></p>
+					<div class="collapse" id="collapse13">
+						<span>Все складские помещения оборудованы электронной системой доступа по пин-коду, поэтому попасть на склад могут только арендаторы и доверенные лица. Более того, все склады находятся под видеонаблюдением, а служба круглосуточной заботы о клиентах Кладовкин осуществляет мониторинг и реагирование на нестандартные ситуации.</span>
+					</div>
+					<p><a class="fs_24 SelfStorage_grey text-decoration-none" data-bs-toggle="collapse" href="#collapse14" role="button" aria-expanded="false" aria-controls="collapseExample">
+						Чем, помимо местоположения, отличаются склады сети SelfStorage между собой?
+					</a></p>
+					<div class="collapse" id="collapse14">
+						<span>Наши склады бывают двух типов: автоматизированные и с администратором. Более того, каждый склад обладает некоторыми особенностями. Так, например, в некоторых складах есть возможность подъехать к боксу прямо на машине, в других прилегающая к складу территория обустроена под парковку. Чтобы найти подходящий под свои потребности склад, переходите на страницу Боксы и цены с возможностью настроить фильтрацию по ключевым характеристикам.</span>
+					</div>
+					<p><a class="fs_24 SelfStorage_grey text-decoration-none" data-bs-toggle="collapse" href="#collapse15" role="button" aria-expanded="false" aria-controls="collapseExample">
+						Боксы каких размеров можно арендовать в SelfStorage?
+					</a></p>
+					<div class="collapse" id="collapse15">
+						<span>Мы предлагаем широкий выбор боксов разных размеров площадью от 1 до 50 м2. Выбирая бокс, обратите внимание на высоту потолков, параметры бокса и дверного проёма, а чтобы точно не ошибиться с выбором, ознакомьтесь с нашими материалами на странице
+							<a href="#" class="SelfStorage_orange">Как выбрать бокс</a> или получите консультацию специалиста.</span>
+					</div>
+					<p><a class="fs_24 SelfStorage_grey text-decoration-none" data-bs-toggle="collapse" href="#collapse16" role="button" aria-expanded="false" aria-controls="collapseExample">
+						Что нельзя хранить в боксах SelfStorage?
+					</a></p>
+					<div class="collapse" id="collapse16">
+						<p>Мы не принимаем на хранение следующие позиции:</p>
+						<ul>
+							<li>токсичные и радиоактивные вещества;</li>
+							<li>материалы, источающие дым и запах;</li>
+							<li>легковоспламеняющиеся материалы и жидкости;</li>
+							<li>запрещенные к обороту в РФ предметы;</li>
+							<li>оружие и взрывоопасные вещества;</li>
+							<li>деньги и ценные бумаги;</li>
+							<li>продукты питания;</li>
+							<li>растения и животные;</li>
+							<li>лекарственные препараты в любой форме.</li>
+						</ul>
+						<p>Будьте внимательны: оформляя договор аренды, вы соглашаетесь с этими условиями и берёте на себя полную ответственность за содержимое бокса.</p>
+					</div>
+					<p><a class="fs_24 SelfStorage_grey text-decoration-none" data-bs-toggle="collapse" href="#collapse17" role="button" aria-expanded="false" aria-controls="collapseExample">
+						Что такое антресольный бокс?
+					</a></p>
+					<div class="collapse" id="collapse17">
+						<span>Боксы антресольного типа представляют собой ячейки, расположенные выше уровня пола, как правило, на высоте около 2 метров. Доступ к таким боксам осуществляется с помощью передвижных лестниц-платформ, которые доступны всем арендаторам.</span>
+					</div>
+					<p><a class="fs_24 SelfStorage_grey text-decoration-none" data-bs-toggle="collapse" href="#collapse18" role="button" aria-expanded="false" aria-controls="collapseExample">
+						Как перевезти, погрузить и разгрузить вещи?
+					</a></p>
+					<div class="collapse" id="collapse18">
+						<p>Вы можете перевезти вещи самостоятельно или воспользоваться услугами доставки:</p>
+						<ul>
+							<li><a href="#" CLASS="SelfStorage_orange">SelfStorage</a>: Закажите услугу перевозки вещей под ключ, а мы бережно упакуем, погрузим и перевезем ваши вещи на склад.</li>
+							<li><a href="#" CLASS="SelfStorage_orange">Яндекс Go</a>: Закажите грузовое такси, чтобы перевезти вещи в самые сжатые сроки.</li>
+							<li><a href="#" CLASS="SelfStorage_orange">Яндекс.Драйв</a>: Воспользуйтесь услугами грузового каршеринга, чтобы перевезти вещи самостоятельно.</li>
+						</ul>
+					</div>
+				</div>
+				<div class="tab-pane fade" id="Rent" role="tabpanel" aria-labelledby="Rent-tab">
+					<h2 class="fw-bold">Доступ к складам и боксам</h2>
+					<p><a class="fs_24 SelfStorage_grey text-decoration-none" data-bs-toggle="collapse" href="#collapse21" role="button" aria-expanded="false" aria-controls="collapseExample">
+						Как осуществляется доступ к боксу?
+					</a></p>
+					<div class="collapse" id="collapse21">
+						<span>Бокс – это ваш личный мини-склад, расположенный в складском комплексе SelfStorage.
+В полностью автоматизированных складах боксы оборудованы электронной системой доступа по пин-коду, который вы получите по СМС сразу после заключения договора аренды. Пин-код нужно будет ввести в специальный терминал на территории складского комплекса, после чего доступ к вашему личному мини-складу будет открыт.
+В складах с администратором боксы закрываются на навесной замок, ключ от которого находиться только у арендатора. Вы можете использовать свой замок или приобрести новый прямо на складе, наши менеджеры помогут вам с выбором.</span>
+					</div>
+					<p><a class="fs_24 SelfStorage_grey text-decoration-none" data-bs-toggle="collapse" href="#collapse22" role="button" aria-expanded="false" aria-controls="collapseExample">
+						Как осуществляется доступ к складскому комплексу?
+					</a></p>
+					<div class="collapse" id="collapse22">
+						<span>Все наши складские комплексы оборудованы электронной системой доступа. Оформив договор аренды онлайн, вы получите СМС на свой телефон с персональным кодом доступа к складу. Полученный пин-код нужно будет ввести в специальное поле в мобильном приложении или в терминал, расположенный рядом с входной дверью в комплекс, после чего доступ будет открыт.
+Код доступа вы всегда сможете найти в своём личном кабинете на сайте или в мобильном приложении.</span>
+					</div>
+					<p><a class="fs_24 SelfStorage_grey text-decoration-none" data-bs-toggle="collapse" href="#collapse23" role="button" aria-expanded="false" aria-controls="collapseExample">
+						В какое время можно попасть на склад и воспользоваться арендованным боксом?
+					</a></p>
+					<div class="collapse" id="collapse23">
+						<span>Мы стремимся сделать процесс использования боксов максимально комфортным, поэтому все филиалы Кладовкин, кроме склада Румянцево, работают круглосуточно и без выходных. Пользуйтесь боксом в любое время как своей личной кладовкой, привозите и забирайте вещи тогда, когда вам удобно.</span>
+					</div>
+					<p><a class="fs_24 SelfStorage_grey text-decoration-none" data-bs-toggle="collapse" href="#collapse24" role="button" aria-expanded="false" aria-controls="collapseExample">
+						Что произойдет, если я забуду свой пин-код?
+					</a></p>
+					<div class="collapse" id="collapse24">
+						<span>Вы всегда можете найти код доступа в своем личном кабинете сайте или в мобильном приложении.
+Если вы утратите доступ к своему личному кабинету, мы поможем вам восстановить аккаунт и обновим пин-код в целях безопасности. Для этого вам, арендатору, необходимо приехать в офис Кладовкин и предъявить ваше удостоверение личности с фотографией.</span>
+					</div>
+					<p><a class="fs_24 SelfStorage_grey text-decoration-none" data-bs-toggle="collapse" href="#collapse25" role="button" aria-expanded="false" aria-controls="collapseExample">
+						Могу ли я посмотреть бокс перед заключением договора аренды?
+					</a></p>
+					<div class="collapse" id="collapse25">
+						<span>Вы можете приехать и посмотреть лично, как всё устроено на складах Кладовкин и в каждом конкретном боксе. Для этого вам нужно оформить гостевой визит, заполнив форму на странице интересующего вас бокса. После заполнения контактных данных вам на телефон придет СМС с одноразовым кодом доступа в складской комплекс, которым вы сможете воспользоваться в течение 7 дней после получения.</span>
+					</div>
+					<p><a class="fs_24 SelfStorage_grey text-decoration-none" data-bs-toggle="collapse" href="#collapse26" role="button" aria-expanded="false" aria-controls="collapseExample">
+						Могу ли я разрешить другим лицам доступ к моему боксу?
+					</a></p>
+					<div class="collapse" id="collapse26">
+						<span>В Кладовкин вы можете пользоваться боксом вместе с другими людьми: членами семьи, коллегами или друзьями. Для этого вам нужно поделиться ключом от своего навесного замка или пин-кодом от электромеханического. Не забудьте сообщить код доступа к складскому помещению.</span>
+					</div>
+					<p><a class="fs_24 SelfStorage_grey text-decoration-none" data-bs-toggle="collapse" href="#collapse27" role="button" aria-expanded="false" aria-controls="collapseExample">
+						Могу ли я поменять пин-код от своего бокса?
+					</a></p>
+					<div class="collapse" id="collapse27">
+						<span>Конечно! Поменять пин-код от своего бокса вы можете по телефону службы круглосуточной заботы о клиентах Кладовкин или в нашем офисе.</span>
+					</div>
+				</div>
+				<div class="tab-pane fade" id="FAQ" role="tabpanel" aria-labelledby="FAQ-tab">
+					<h2 class="fw-bold">Договор аренды и оплата</h2>
+					<p><a class="fs_24 SelfStorage_grey text-decoration-none" data-bs-toggle="collapse" href="#collapse31" role="button" aria-expanded="false" aria-controls="collapseExample">
+						Как арендовать помещение для хранения в SelfStorage?
+					</a></p>
+					<div class="collapse" id="collapse31">
+						<span>Чтобы арендовать бокс, вам нужно зарегистрироваться в личном кабинете, выбрать подходящий тариф и оплатить услуги. Всё это вы можете сделать онлайн, по телефону службы круглосуточной заботы о клиентах Кладовкин или в нашем офисе.
+Чтобы узнать подробнее о процедуре аренды бокса, переходите на страницу "Как выбрать бокс" или получите консультацию специалиста.</span>
+					</div>
+					<p><a class="fs_24 SelfStorage_grey text-decoration-none" data-bs-toggle="collapse" href="#collapse32" role="button" aria-expanded="false" aria-controls="collapseExample">
+						Какой минимальный и максимальный срок аренды бокса?
+					</a></p>
+					<div class="collapse" id="collapse32">
+						<span>Вы можете арендовать бокс на любой срок от 1 месяца.
+Договор аренды заключается на срок до 11 месяцев с последующим автоматическим продлением до того момента, пока вы не захотите его расторгнуть.</span>
+					</div>
+					<p><a class="fs_24 SelfStorage_grey text-decoration-none" data-bs-toggle="collapse" href="#collapse33" role="button" aria-expanded="false" aria-controls="collapseExample">
+						Нужно заключать договор аренды заранее или же можно сделать это в день привоза вещей?
+					</a></p>
+					<div class="collapse" id="collapse33">
+						<span>Заключать договор предварительно совсем не обязательно. Вы можете оформить договор онлайн в любое время суток или по приезде на склад с администратором непосредственно в день начала пользования складским помещением.</span>
+					</div>
+					<p><a class="fs_24 SelfStorage_grey text-decoration-none" data-bs-toggle="collapse" href="#collapse34" role="button" aria-expanded="false" aria-controls="collapseExample">
+						Какие документы необходимы для заключения договора аренды?
+					</a></p>
+					<div class="collapse" id="collapse34">
+						<span>Физическим лицам для заключения договора аренды понадобится только паспорт. Прикрепите фотографию или скан документа к личному кабинету, если арендуете бокс онлайн, или возьмите оригинал с собой для заключения договора в офисе.
+Чтобы узнать полный список документов, необходимых для заключения договора аренды юридическому лицу, получите консультацию специалиста Круглосуточной службы поддержки клиентов.</span>
+					</div>
+					<p><a class="fs_24 SelfStorage_grey text-decoration-none" data-bs-toggle="collapse" href="#collapse35" role="button" aria-expanded="false" aria-controls="collapseExample">
+						Какие способы оплаты принимает SelfStorage?
+					</a></p>
+					<div class="collapse" id="collapse35">
+						<p>Вы можете оплатить аренду бокса любым удобным способом:</p>
+						<ul>
+							<li>В личном кабинете на сайте банковской картой или через электронные кошельки*;</li>
+							<li>В офисе Кладовкин наличными или банковской картой;</li>
+							<li>По реквизитам в отделении любого банка или онлайн.</li>
+						</ul>
+						<p>* Вы можете привязать банковскую карту к своему личному кабинету и настроить ежемесячный автоматический платёж.</p>
+					</div>
+					<p><a class="fs_24 SelfStorage_grey text-decoration-none" data-bs-toggle="collapse" href="#collapse36" role="button" aria-expanded="false" aria-controls="collapseExample">
+						Нужно ли оплачивать весь срок аренды сразу?
+					</a></p>
+					<div class="collapse" id="collapse36">
+						<span>Нет, вы можете производить оплату ежемесячно, расчетным днём будет считаться дата заключения договора.
+Каждый месяц за 7 дней до начала нового арендного периода вам на электронную почту будет поступать счет оплаты. Вы можете производить оплату с помощью банковских карт, наличными в нашем офисе или по реквизитам в банке. Если же вы прикрепите карту к личному кабинету, оплата будет производиться автоматически в первый день нового арендного периода.</span>
+					</div>
+					<p><a class="fs_24 SelfStorage_grey text-decoration-none" data-bs-toggle="collapse" href="#collapse37" role="button" aria-expanded="false" aria-controls="collapseExample">
+						От чего зависит размер арендной ставки?
+					</a></p>
+					<div class="collapse" id="collapse37">
+						<span>Размер арендной ставки зависит от выбранного тарифного плана: чем больше предполагаемый срок аренды, тем выше скидка на стоимость бокса в месяц.
+В нашей компании действуют три тарифа аренды: 1 месяц, 6 месяцев и 1 год. Выбрав любой из тарифов, вы можете оплачивать аренду ежемесячно.</span>
+					</div>
+					<p><a class="fs_24 SelfStorage_grey text-decoration-none" data-bs-toggle="collapse" href="#collapse38" role="button" aria-expanded="false" aria-controls="collapseExample">
+						Как и когда можно расторгнуть договор аренды?
+					</a></p>
+					<div class="collapse" id="collapse38">
+						<span>Договор может быть расторгнут в любое время. Для этого вам нужно освободить помещение и оставить его открытым, после чего нажать кнопку «Закрыть договор» в личном кабинете или сообщить о расторжении договора менеджеру службы круглосуточной заботы о клиентах. Мы проверим бокс и вернем вам депозит в течение 10 рабочих дней с момента закрытия договора.</span>
+					</div>
+					<p><a class="fs_24 SelfStorage_grey text-decoration-none" data-bs-toggle="collapse" href="#collapse39" role="button" aria-expanded="false" aria-controls="collapseExample">
+						За какой срок я должен уведомить о расторжении договора?
+					</a></p>
+					<div class="collapse" id="collapse39">
+						<span>Мы просим наших клиентов сообщать нам о предполагаемой дате расторжения договора за 10 рабочих дней до момента ее наступления.</span>
+					</div>
+					<p><a class="fs_24 SelfStorage_grey text-decoration-none" data-bs-toggle="collapse" href="#collapse310" role="button" aria-expanded="false" aria-controls="collapseExample">
+						Как определяется размер обеспечительного платежа?
+					</a></p>
+					<div class="collapse" id="collapse310">
+						<span>Сумма обеспечительного платежа или, иными словами, страхового депозита составляет 50% от размера арендной ставки. Депозит оплачивается один раз при заключении договора и возвращается при его расторжении в течение 10 рабочих дней.</span>
+					</div>
+					<p><a class="fs_24 SelfStorage_grey text-decoration-none" data-bs-toggle="collapse" href="#collapse311" role="button" aria-expanded="false" aria-controls="collapseExample">
+						Срочно нужно увеличить площадь. Как быть?
+					</a></p>
+					<div class="collapse" id="collapse311">
+						<span>Если по каким-либо причинам вам нужен бокс большего или меньшего размера, на другом складе или по другой цене, вы всегда можете обратиться с вопросом в Круглосуточную службу заботы о клиентах Кладовкин. Наши специалисты помогут подобрать подходящий бокс и переоформят договор аренды.</span>
+					</div>
+				</div>
+			</div>
+		</div>
+	</div>
+</main>
+<aside class="py-5 mt-header SelfStorage__bg_green">
+	<div class="container py-5Арендовать бокс">
+		<div class="d-flex flex-column align-items-center">
+			<h1 class="text-white text-center fw-bold mb-4">Остались вопросы?</h1>
+			<h4 class="text-white text-center fw-light">Оставьте заявку и наши менеджеры свяжутся с вами в ближайшее время</h4>
+			<form class="row my-4">
+				<div class="col-12 col-lg-6">
+					<input type="text" required name="EMAIL2" class="form-control border-8 mb-4 me-3 py-3 px-5 border-0 fs_24 SelfStorage__bg_lightgrey" placeholder="Укажите ваш e-mail">
+				</div>
+				<div class="col-12 col-lg-6">
+					<button class="btn w-100 border-8 py-3 px-5 text-white fs_24 SelfStorage__bg_orange SelfStorage__btn2_orange">Рассчитать стоимость</button>
+				</div>
+			</form>
+			<span class="text-white text-center fw-light">Нажимая на кнопку, вы подтверждаете свое <a href="#" class="text-white">согласие на обработку персональных данных</a></span>
+		</div>
+	</div>
+</aside>
+<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/js/bootstrap.bundle.min.js" integrity="sha384-MrcW6ZMFYlzcLA8Nl+NtUVF0sA7MsXsP1UyJoMp4YLEuNSfAP+JcXn/tWtIaxVXM" crossorigin="anonymous"></script>
+{% endblock %}

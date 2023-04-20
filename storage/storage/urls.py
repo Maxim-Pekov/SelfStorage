@@ -27,4 +27,4 @@ urlpatterns = [
     path('my-rent/', views.show_user_rent, name='my-rent'),
     path('my-rent-empty/', views.show_user_rent_empty, name='my-rent-empty'),
 ]
-urlpatterns += static(settings.STATIC_URL, document_root=settings.STATIC_ROOT)
+urlpatterns += static(settings.MEDIA_URL, document_root=settings.MEDIA_ROOT)

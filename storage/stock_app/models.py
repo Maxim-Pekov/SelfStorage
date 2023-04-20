@@ -35,10 +35,6 @@ class Storage(models.Model):
     image = models.ImageField('Фото')
     slug = models.SlugField(default='', null=False)
 
-    def save(self, *args, **kwargs):
-        self.slug = slugify(self.title)
-        super(Storage, self).save(*args, **kwargs)
-
     class Meta:
         verbose_name = 'Склад'
         verbose_name_plural = 'Склады'

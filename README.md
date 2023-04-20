@@ -29,5 +29,33 @@ redis-server
 Run celery worker:
 
 ```bash
-celery -A selfstorage worker -l info
+celery -A storage worker -l info
 ```
+
+Run migrations:
+
+```bash
+python manage.py migrate
+```
+
+Run Django server:
+
+```bash
+python manage.py runserver
+```
+
+## Set up for ENV variables
+
+Create .env file in the root directory of the project and set up the following variables:
+
+```bash
+SECRET_KEY=your_secret_key
+DEBUG=True
+ALLOWED_HOSTS=
+EMAIL_HOST_USER=your_email
+EMAIL_HOST_PASSWORD=your_password
+EMAIL_HOST=smtp.gmail.com
+EMAIL_PORT=587
+EMAIL_USE_TLS=True
+```
+

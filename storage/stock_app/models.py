@@ -34,7 +34,7 @@ class Storage(models.Model):
     address = models.CharField('Адрес', max_length=200)
     image = models.ImageField('Фото')
     slug = models.SlugField(default='', null=False)
-    status = models.BooleanField('Статус', default=None)
+    status = models.BooleanField('Статус')
 
     class Meta:
         verbose_name = 'Склад'
@@ -47,9 +47,10 @@ class Storage(models.Model):
 class Box(models.Model):
     title = models.CharField('Бокс', max_length=100)
     status = models.BooleanField('Статус', default=None)
-    storage = models.ForeignKey('Склад', Storage,
+    storage = models.ForeignKey(Storage,
                                 on_delete=models.CASCADE,
-                                related_name='storages',
+                                related_name='box_storages',
+                                verbose_name='Склад',
                                 null=True)
     price = models.IntegerField('Цена') 
     size = models.IntegerField('Размер')
@@ -59,7 +60,7 @@ class Box(models.Model):
         verbose_name_plural = 'Боксы'
 
     def __str__(self):
-        return self.address
+        return self.title
 
 
 class Order(models.Model):

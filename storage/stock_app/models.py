@@ -34,10 +34,29 @@ class Storage(models.Model):
     address = models.CharField('Адрес', max_length=200)
     image = models.ImageField('Фото')
     slug = models.SlugField(default='', null=False)
+    status = models.BooleanField('Статус', default=None)
 
     class Meta:
         verbose_name = 'Склад'
         verbose_name_plural = 'Склады'
+
+    def __str__(self):
+        return self.address
+
+
+class Box(models.Model):
+    title = models.CharField('Бокс', max_length=100)
+    status = models.BooleanField('Статус', default=None)
+    storage = models.ForeignKey('Склад', Storage,
+                                on_delete=models.CASCADE,
+                                related_name='storages',
+                                null=True)
+    price = models.IntegerField('Цена') 
+    size = models.IntegerField('Размер')
+    
+    class Meta:
+        verbose_name = 'Бокс'
+        verbose_name_plural = 'Боксы'
 
     def __str__(self):
         return self.address

@@ -1,5 +1,6 @@
 from django.db import models
 from django.contrib.auth.models import User
+from django.utils.text import slugify
 
 
 class Client(models.Model):
@@ -16,8 +17,6 @@ class Client(models.Model):
         return f'{self.firstname} {self.lastname}'  # можно грохнуть и заменить User
     
 
-
-
 class Tariff(models.Model):
     title = models.CharField('Название тарифа', max_length=50)
     price = models.IntegerField('Цена') 
@@ -26,7 +25,6 @@ class Tariff(models.Model):
     class Meta:
         verbose_name = 'Тариф'
 
-     
     def  __str__(self):
         return self.title
 
@@ -35,6 +33,11 @@ class Storage(models.Model):
     title = models.CharField('Склад', max_length=100)
     address = models.CharField('Адрес', max_length=200)
     image = models.ImageField('Фото')
+    slug = models.SlugField(default='', null=False)
+
+    def save(self, *args, **kwargs):
+        self.slug = slugify(self.title)
+        super(Storage, self).save(*args, **kwargs)
 
     class Meta:
         verbose_name = 'Склад'

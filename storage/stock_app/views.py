@@ -2,7 +2,7 @@ import uuid
 import qrcode
 
 from django.shortcuts import render
-from stock_app.models import Storage, Box, User, Client
+from stock_app.models import Storage, Box, Client
 from mailapp.tasks import send_notification_mail
 from django.shortcuts import redirect
 from yookassa import Configuration, Payment
@@ -67,7 +67,7 @@ def show_user_rent(request, user_id):
         'client': client
     }
     if request.method == 'POST' and 'box_id' in request.POST:
-        process_open_box(request)
+        process_open_box(request, client)
     return render(request, 'my-rent.html', context)
 
 
@@ -91,9 +91,9 @@ def process_welcome_email(request):
     return "Done"
 
 
-def process_open_box(request):
+def process_open_box(request, client):
 
-    user_mail = 'aslepaugo@gmail.com'
+    user_mail = client.email
 
     box_id = request.POST.get('box_id')
     if not box_id:

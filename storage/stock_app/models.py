@@ -52,7 +52,7 @@ class Box(models.Model):
                                 related_name='box_storages',
                                 verbose_name='Склад',
                                 null=True)
-    price = models.IntegerField('Цена') 
+    price = models.IntegerField('Цена')
     size = models.IntegerField('Размер')
     
     class Meta:
@@ -65,15 +65,9 @@ class Box(models.Model):
 
 class Order(models.Model):
     client = models.ForeignKey(
-        User, on_delete=models.CASCADE,
+        Client, on_delete=models.CASCADE,
         related_name='clients',
         verbose_name='Клиент'
-    )
-    address = models.CharField(
-        'Адрес',
-        max_length=200,
-        null=True,
-        blank=True
     )
     time = models.DateTimeField('Время создания заказа', auto_now=True)
     comment = models.TextField(
@@ -89,13 +83,12 @@ class Order(models.Model):
         related_name='tariffs',
         verbose_name='Тариф'
     )
-    qr_code = models.CharField(max_length=200, null=True, blank=False)
-    storage = models.ForeignKey(
-        Storage,
+    box = models.ForeignKey(
+        Box,
         on_delete=models.CASCADE,
-        related_name='storages',
+        related_name='boxes',
         null=True,
-        verbose_name='Cклад'
+        verbose_name='Ячейка хранения'
     )
     paid_till = models.DateTimeField('Оплата до', null=True)
 
@@ -104,4 +97,4 @@ class Order(models.Model):
         verbose_name_plural = 'Заказы'
 
     def __str__(self) -> str:
-        return self
+        return f"{self.client} {self.time}"

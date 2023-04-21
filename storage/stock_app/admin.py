@@ -1,5 +1,5 @@
 from django.contrib import admin
-from .models import Client, Tariff, Storage, Order
+from .models import Client, Tariff, Storage, Order, Box
 
 
 @admin.register(Client)
@@ -19,4 +19,9 @@ class StorageAdmin(admin.ModelAdmin):
 
 @admin.register(Order)
 class OrderAdmin(admin.ModelAdmin):
+    pass
+
+
+@admin.register(Box)
+class BoxAdmin(admin.ModelAdmin):
     pass

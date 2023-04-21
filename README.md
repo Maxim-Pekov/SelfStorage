@@ -26,16 +26,23 @@ sudo apt install redis-server
 redis-server
 ```
 
+Run migrations:
+!IMPORTANT! Migrations should be run before celery worker and celery beat are started.
+
+```bash
+python manage.py migrate
+```
+
 Run celery worker under your virtual environment:
 
 ```bash
 celery -A mailapp worker -l info
 ```
 
-Run migrations:
+Run celery beat under your virtual environment:
 
 ```bash
-python manage.py migrate
+celery -A mailapp beat -l info
 ```
 
 Run Django server:

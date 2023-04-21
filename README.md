@@ -26,10 +26,10 @@ sudo apt install redis-server
 redis-server
 ```
 
-Run celery worker:
+Run celery worker under your virtual environment:
 
 ```bash
-celery -A storage worker -l info
+celery -A mailapp worker -l info
 ```
 
 Run migrations:

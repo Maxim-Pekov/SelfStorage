@@ -52,9 +52,11 @@ class Box(models.Model):
                                 related_name='box_storages',
                                 verbose_name='Склад',
                                 null=True)
-    price = models.IntegerField('Цена') 
-    size = models.IntegerField('Размер')
-    
+    price = models.IntegerField('Цена')
+    length = models.FloatField('Длина')
+    width = models.FloatField('Ширина')
+    height = models.FloatField('Высота')
+
     class Meta:
         verbose_name = 'Бокс'
         verbose_name_plural = 'Боксы'

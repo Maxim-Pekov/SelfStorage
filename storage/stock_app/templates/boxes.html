@@ -23,17 +23,17 @@
 		<h6 class="text-center SelfStorage_grey">Арендуйте склад индивидуального хранения по уникальной цене прямо сейчас</h6>
 		<a href="#BOX" id="toBox" class="d-none"></a>
 		<ul class="nav nav-pills mb-3 d-flex justify-content-between" id="boxes-links" role="tablist">
-			{% for box in boxes %}
+			{% for storage in storages %}
 				<li class="nav-item flex-grow-1 mx-2" role="presentation">
 				<a href="#BOX"
-				   class="row text-decoration-none py-3 px-4 mt-5 SelfStorage__boxlink" id="pills-{{ box.slug }}-tab" data-bs-toggle="pill" data-bs-target="#pills-{{ box.slug }}" role="tab" aria-controls="pills-{{ box.slug }}" aria-selected="true">
+				   class="row text-decoration-none py-3 px-4 mt-5 SelfStorage__boxlink" id="pills-{{ storage.slug }}-tab" data-bs-toggle="pill" data-bs-target="#pills-{{ storage.slug }}" role="tab" aria-controls="pills-{{ storage.slug }}" aria-selected="true">
 					<div class="col-12 col-lg-3 d-flex justify-content-center">
-						<img src="{{ box.image.url }}" alt=""
+						<img src="{{ storage.image.url }}" alt=""
 							 class="mb-3 mb-lg-0">
 					</div>
 					<div class="col-12 col-md-4 col-lg-3 d-flex flex-column justify-content-center">
-						<h4 class="text-center">{{ box.title }}</h4>
-						<h6 class="text-center">{{ box.address }}</h6>
+						<h4 class="text-center">{{ storage.title }}</h4>
+						<h6 class="text-center">{{ storage.address }}</h6>
 					</div>
 					<div class="col-12 col-md-4 col-lg-3 d-flex flex-column justify-content-center">
 						<h4 class="text-center">14  из 390</h4>
@@ -49,8 +49,8 @@
 
 		</ul>
 		<script>
-			{% for box in boxes %}
-				document.getElementById('pills-{{ box.slug }}-tab').addEventListener('click', () => {
+			{% for storage in storages %}
+				document.getElementById('pills-{{ storage.slug }}-tab').addEventListener('click', () => {
 					document.getElementById('toBox').click()
 				})
 			{% endfor %}
@@ -58,9 +58,10 @@
 	</article>
 	<article class="pt-header" id="BOX">
 		<div class="tab-content" id="boxes-content">
-			{% for box in boxes %}
-			<div class="tab-pane fade" id="pills-{{ box.slug }}" role="tabpanel" aria-labelledby="pills-{{ box.slug }}-tab">
-				<h1 class="text-center mb-4 fw-bold">{{ box.title }}, {{ box.address }}</h1>
+			{% for storage in storages %}
+			<div class="tab-pane fade" id="pills-{{ storage.slug }}"
+				 role="tabpanel" aria-labelledby="pills-{{ storage.slug }}-tab">
+				<h1 class="text-center mb-4 fw-bold">{{ storage.title }}, {{ storage.address }}</h1>
 				<div class="row d-flex flex-column mb-5">
 					<div class="col-12 col-sm-6 col-lg-4 d-flex justify-content-between align-self-center">
 						<a type="button" class="SelfStorage_orange" data-bs-container="body" data-bs-toggle="popover" data-bs-placement="bottom" title="Контакты" data-bs-content="Список контактов">
@@ -165,20 +166,23 @@
 		</ul>
 		<div class="tab-content" id="pills-tabContent">
 			<div class="tab-pane fade show active" id="pills-all" role="tabpanel" aria-labelledby="pills-home-tab">
-				<a href="#" class="row text-decoration-none py-3 px-4 mt-5 SelfStorage__boxlink">
+				{% for box in boxes %}
+				<a href="{% url 'payment' 100 %}"
+				   class="row text-decoration-none py-3 px-4 mt-5 SelfStorage__boxlink">
 					<div class="col-12 col-md-4 col-lg-3 d-flex justify-content-center align-items-center">
-						<span class="SelfStorage_green fs_24 me-2">1 эт.</span><span class="fs_24">№1389-11</span>
+						<span class="SelfStorage_green fs_24 me-2">1 эт.</span><span class="fs_24">№{{ box.title }}</span>
 					</div>
 					<div class="col-6 col-md-4 col-lg-3 d-flex justify-content-center align-items-center">
-						<span class="fs_24">2 м²</span>
+						<span class="fs_24">{{ box.size }} м²</span>
 					</div>
 					<div class="col-6 col-md-4 col-lg-3 d-flex justify-content-center align-items-center">
 						<span class="fs_24">2 х 1 х 2.5 м²</span>
 					</div>
 					<div class="col-12 col-lg-3">
-						<span class="btn my-2 w-100 text-white fs_24 SelfStorage__bg_orange SelfStorage__btn2_orange border-8">От 2264 ₽</span>
+						<span class="btn my-2 w-100 text-white fs_24 SelfStorage__bg_orange SelfStorage__btn2_orange border-8">От {{ box.price }} ₽</span>
 					</div>
 				</a>
+				{% endfor %}
 				<a href="#" class="row text-decoration-none py-3 px-4 mt-5 SelfStorage__boxlink">
 					<div class="col-12 col-md-4 col-lg-3 d-flex justify-content-center align-items-center">
 						<span class="SelfStorage_green fs_24 me-2">2 эт.</span><span class="fs_24">№2389-13</span>

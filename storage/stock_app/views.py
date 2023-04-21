@@ -1,6 +1,10 @@
 from django.shortcuts import render
-from stock_app.models import Storage
+from stock_app.models import Storage, Box
 from mailapp.tasks import send_notification_mail
+from django.shortcuts import redirect
+import uuid
+from yookassa import Configuration, Payment
+from django.conf import settings
 
 
 def index(request):
@@ -11,11 +15,37 @@ def index(request):
 
 
 def rent_boxes(request):
-    boxes = Storage.objects.all()
+    storages = Storage.objects.all()
+    boxes = Box.objects.all()
     context = {
+        'storages': storages,
         'boxes': boxes
     }
     return render(request, 'boxes.html', context=context)
+
+
+def payment_view(request, boxnumber):
+    boxes = boxnumber
+
+    Configuration.account_id = settings.YOOKASSA_SHOP_ID
+    Configuration.secret_key = settings.YOOKASSA_API_KEY
+
+    payment = Payment.create({
+        "amount": {
+            "value": "100.00",
+            "currency": "RUB"
+        },
+        "confirmation": {
+            "type": "redirect",
+            "return_url": "https://www.google.com/"
+        },
+        "capture": True,
+        "description": "Заказ №1"
+    }, uuid.uuid4())
+    context = {
+        'boxes': boxes
+    }
+    return redirect(payment.confirmation.confirmation_url)
 
 
 def show_faq(request):

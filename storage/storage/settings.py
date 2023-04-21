@@ -42,6 +42,7 @@ INSTALLED_APPS = [
     'django.contrib.messages',
     'django.contrib.staticfiles',
     'django_celery_results',
+    'django_celery_beat',
     'stock_app',
     'mailapp',
 ]
@@ -154,6 +155,9 @@ CELERY_RESULT_SERIALIZER = 'json'
 CELERY_TASK_SERIALIZER = 'json'
 CELERY_TIMEZONE = 'Europe/Moscow'
 CELERY_RESULT_BACKEND = 'django-db'
+CELERY_BEAT_SCHEDULER = 'django_celery_beat.schedulers:DatabaseScheduler'
+
+START_RENT_REMINDER_DAYS = 3
 
 YOOKASSA_API_KEY = env('YOOKASSA_API_KEY')
 YOOKASSA_SHOP_ID = env('YOOKASSA_SHOP_ID')

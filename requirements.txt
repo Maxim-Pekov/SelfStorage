@@ -5,3 +5,5 @@ celery==5.2.*
 django-celery-results==2.2.*
 redis==4.5.*
 qrcode==7.4.*
+yookassa==2.3.5
+django-celery-beat==2.5.*

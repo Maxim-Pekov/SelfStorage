@@ -44,7 +44,6 @@ INSTALLED_APPS = [
     'django_celery_results',
     'stock_app',
     'mailapp',
-    'qrcodeapp',
 ]
 
 MIDDLEWARE = [

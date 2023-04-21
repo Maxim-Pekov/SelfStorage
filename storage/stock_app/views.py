@@ -2,7 +2,7 @@ import uuid
 import qrcode
 
 from django.shortcuts import render
-from stock_app.models import Storage, Box
+from stock_app.models import Storage, Box, User, Client
 from mailapp.tasks import send_notification_mail
 from django.shortcuts import redirect
 from yookassa import Configuration, Payment
@@ -45,7 +45,7 @@ def payment_view(request, boxnumber):
         },
         "confirmation": {
             "type": "redirect",
-            "return_url": "http://127.0.0.1:8000/my-rent/"
+            "return_url": "http://80.249.146.130/my-rent/1"
         },
         "capture": True,
         "description": f"Бокс №{boxes.title} - "
@@ -54,9 +54,6 @@ def payment_view(request, boxnumber):
                        f"Ширина {boxes.width} - "
                        f"Высота {boxes.height}"
     }, uuid.uuid4())
-    context = {
-        'boxes': boxes
-    }
     return redirect(payment.confirmation.confirmation_url)
 
 
@@ -64,10 +61,14 @@ def show_faq(request):
     return render(request, 'faq.html')
 
 
-def show_user_rent(request):
+def show_user_rent(request, user_id):
+    client = Client.objects.get(id=user_id)
+    context = {
+        'client': client
+    }
     if request.method == 'POST' and 'box_id' in request.POST:
         process_open_box(request)
-    return render(request, 'my-rent.html')
+    return render(request, 'my-rent.html', context)
 
 
 def show_user_rent_empty(request):

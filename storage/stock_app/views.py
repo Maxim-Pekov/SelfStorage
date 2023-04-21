@@ -1,15 +1,12 @@
 import uuid
 import qrcode
 
-from django.conf import settings
 from django.shortcuts import render
 from stock_app.models import Storage, Box
 from mailapp.tasks import send_notification_mail
 from django.shortcuts import redirect
-import uuid
 from yookassa import Configuration, Payment
 from django.conf import settings
-
 
 
 def index(request):
@@ -19,33 +16,43 @@ def index(request):
     return render(request, 'index.html')
 
 
-def rent_boxes(request):
+def storage_view(request):
     storages = Storage.objects.all()
-    boxes = Box.objects.all()
+    boxes = Box.objects.calculate_box_square()
+    boxes_lower_3_square = boxes.filter(box_square__lt=3)
+    boxes_lower_10_square = boxes.filter(box_square__lt=10)
+    boxes_upper_10_square = boxes.filter(box_square__gte=10)
     context = {
         'storages': storages,
-        'boxes': boxes
+        'boxes': boxes,
+        'boxes_lower_3_square': boxes_lower_3_square,
+        'boxes_lower_10_square': boxes_lower_10_square,
+        'boxes_upper_10_square': boxes_upper_10_square,
     }
     return render(request, 'boxes.html', context=context)
 
 
 def payment_view(request, boxnumber):
-    boxes = boxnumber
+    boxes = Box.objects.get(id=boxnumber)
 
     Configuration.account_id = settings.YOOKASSA_SHOP_ID
     Configuration.secret_key = settings.YOOKASSA_API_KEY
 
     payment = Payment.create({
         "amount": {
-            "value": "100.00",
+            "value": boxes.price,
             "currency": "RUB"
         },
         "confirmation": {
             "type": "redirect",
-            "return_url": "https://www.google.com/"
+            "return_url": "http://127.0.0.1:8000/my-rent/"
         },
         "capture": True,
-        "description": "Заказ №1"
+        "description": f"Бокс №{boxes.title} - "
+                       f"Цена {boxes.price} - "
+                       f"Длина {boxes.length} - "
+                       f"Ширина {boxes.width} - "
+                       f"Высота {boxes.height}"
     }, uuid.uuid4())
     context = {
         'boxes': boxes

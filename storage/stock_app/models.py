@@ -1,5 +1,7 @@
 from django.db import models
 from django.contrib.auth.models import User
+from django.db.models import Q
+from django.db.models import F
 from django.utils.text import slugify
 
 
@@ -44,6 +46,13 @@ class Storage(models.Model):
         return self.address
 
 
+class BoxQuerySet(models.QuerySet):
+    def calculate_box_square(self):
+        return self.annotate(
+            box_square=F("length") * F("width"),
+        )
+
+
 class Box(models.Model):
     title = models.CharField('Бокс', max_length=100)
     status = models.BooleanField('Статус', default=None)
@@ -56,6 +65,8 @@ class Box(models.Model):
     length = models.FloatField('Длина')
     width = models.FloatField('Ширина')
     height = models.FloatField('Высота')
+
+    objects = BoxQuerySet.as_manager()
 
     class Meta:
         verbose_name = 'Бокс'

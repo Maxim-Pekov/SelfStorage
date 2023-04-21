@@ -4,3 +4,4 @@ Pillow==9.4.0
 celery==5.2.*
 django-celery-results==2.2.*
 redis==4.5.*
+qrcode==7.4.*

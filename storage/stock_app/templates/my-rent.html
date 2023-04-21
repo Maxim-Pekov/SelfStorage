@@ -66,7 +66,15 @@
 						<h4 class="SelfStorage_green">Срок аренды</h4>
 						<h4>15.03.2022 - 28.06.2022</h4>
 						<div><button class="btn fs_24 px-5 py-3 text-white border-8 SelfStorage__bg_green SelfStorage__btn2_green mb-3">Продлить аренду</button></div>
-						<div><button class="btn fs_24 px-5 py-3 text-white border-8 SelfStorage__bg_orange SelfStorage__btn2_orange mb-3">Открыть бокс</button></div>
+						<form method="post">
+							{% csrf_token %}
+							<input type="hidden" name="box_id" value="2389-12">
+							<div>
+								<button class="btn fs_24 px-5 py-3 text-white border-8 SelfStorage__bg_orange SelfStorage__btn2_orange mb-3">
+									Открыть бокс
+								</button>
+							</div>
+						</form>
 						<a href="#" class="SelfStorage_orange">Нужна помощь?</a>
 					</div>
 
@@ -78,7 +86,15 @@
 						<h4 class="SelfStorage_green">Срок аренды</h4>
 						<h4>18.03.2022 - 21.09.2022</h4>
 						<div><button class="btn fs_24 px-5 py-3 text-white border-8 SelfStorage__bg_green SelfStorage__btn2_green mb-3">Продлить аренду</button></div>
-						<div><button class="btn fs_24 px-5 py-3 text-white border-8 SelfStorage__bg_orange SelfStorage__btn2_orange mb-3">Открыть бокс</button></div>
+						<form method="post">
+							{% csrf_token %}
+							<input type="hidden" name="box_id" value="2335-10">
+							<div>
+								<button class="btn fs_24 px-5 py-3 text-white border-8 SelfStorage__bg_orange SelfStorage__btn2_orange mb-3">
+								Открыть бокс
+								</button>
+							</div>
+						</form>
 						<a href="#" class="SelfStorage_orange">Нужна помощь?</a>
 					</div>
 				</div>

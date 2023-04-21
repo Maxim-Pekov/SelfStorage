@@ -21,7 +21,7 @@ def send_notification_mail(self, subject, recipients, template, context):
 
     if context.get('inline_images'):
         for image_name in context.get('inline_images'):
-            with open(f"media/{image_name}", mode='rb') as f:
+            with open(f"{settings.MEDIA_ROOT}/{image_name}", mode='rb') as f:
                 image = MIMEImage(f.read())
                 image.add_header('Content-ID', f"<{image_name}>")
                 message.attach(image)

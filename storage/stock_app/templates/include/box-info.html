@@ -1,0 +1,16 @@
+{% load static %}
+<a href="{% url 'payment' box.id %}"
+   class="row text-decoration-none py-3 px-4 mt-5 SelfStorage__boxlink">
+    <div class="col-12 col-md-4 col-lg-3 d-flex justify-content-center align-items-center">
+        <span class="SelfStorage_green fs_24 me-2">1 эт.</span><span class="fs_24">№{{ box.title }}</span>
+    </div>
+    <div class="col-6 col-md-4 col-lg-3 d-flex justify-content-center align-items-center">
+        <span class="fs_24">{{ box.box_square }} м²</span>
+    </div>
+    <div class="col-6 col-md-4 col-lg-3 d-flex justify-content-center align-items-center">
+        <span class="fs_24">{{ box.length }} х {{ box.width }} х {{ box.height }} м²</span>
+    </div>
+    <div class="col-12 col-lg-3">
+        <span class="btn my-2 w-100 text-white fs_24 SelfStorage__bg_orange SelfStorage__btn2_orange border-8">От {{ box.price }} ₽</span>
+    </div>
+</a>

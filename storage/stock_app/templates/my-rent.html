@@ -17,16 +17,20 @@
 					<div class="row">
 						<div class="col-12 col-sm-5 d-flex flex-column align-items-center">
 							<img src="{% static 'img/image10.png' %}" class="rounded-pill mb-3" alt="">
-							<h4>{{ client.firstname }} {{ client.lastname }}</h4>
+							<h4>{{ request.user.username }}</h4>
 						</div>
 						<div class="col-12 col-sm-7 d-flex flex-column">
-							<form>
+							<form method="post">
 								<label class="fs_24 SelfStorage_green ms-2" for="EMAIL">EMAIL</label>
-								<input type="email" name="EMAIL_EDIT" id="EMAIL" class="form-control fs_24 ps-2 SelfStorage__input" value="{{ client.email }}" disabled>
+								<input type="email" name="EMAIL_EDIT" id="EMAIL" class="form-control fs_24 ps-2 SelfStorage__input" value="{{ request.user.email }}" disabled>
 								<label class="fs_24 SelfStorage_green ms-2" for="PHONE">Телефон</label>
-								<input type="tel" name="PHONE_EDIT" id="PHONE" class="form-control fs_24 ps-2 SelfStorage__input" value="{{ client.phone }}" disabled>
+								{% if request.user.phone %}
+									<input type="tel" name="PHONE_EDIT" id="PHONE" class="form-control fs_24 ps-2 SelfStorage__input" value="{{ request.user.phone }}" disabled>
+								{% else %}
+									<input type="tel" name="PHONE_EDIT" id="PHONE" class="form-control fs_24 ps-2 SelfStorage__input" value="" disabled>
+								{% endif %}
 								<label class="fs_24 SelfStorage_green ms-2" for="PASSWORD">Пароль</label>
-								<input type="password" name="PASSWORD_EDIT" id="PASSWORD" class="form-control fs_24 ps-2 SelfStorage__input" value="111111111" disabled>
+								<input type="password" name="PASSWORD_EDIT" id="PASSWORD" class="form-control fs_24 ps-2 SelfStorage__input" value="" disabled>
 								<button type="submit" class="btn SelfStorage_green ps-1" id="save" style="display: none">Сохранить</button>
 								<a class="btn SelfStorage_orange ps-1" id="edit">Редактировать</a>
 								<script>
@@ -55,7 +59,7 @@
 					</div>
 				</div>
 				<div class="tab-pane fade" id="Rent" role="tabpanel" aria-labelledby="Rent-tab">
-					<h1 class="fw-bold SelfStorage_green mb-5">Добрый день, {{ client.firstname }}!</h1>
+					<h1 class="fw-bold SelfStorage_green mb-5">Добрый день, {{ request.user.username }}!</h1>
 					<a href="#" class="SelfStorage_orange">История аренды</a>
 					<h4 class="SelfStorage_grey my-3">Срок Вашей аренды подходит к концу :(<br>Вы можете продлить аренду или забрать вещи до 28 июня 2022 года включительно.</h4>
 					<div class="mb-5">

@@ -106,6 +106,8 @@ def show_user_rent(request):
     }
     if request.method == 'POST' and 'box_id' in request.POST:
         process_open_box(request)
+    if request.method == 'POST' and 'PASSWORD_EDIT' in request.POST:
+        messages.info(request, 'Not implemented yet')
     return render(request, 'my-rent.html', context)
 
 

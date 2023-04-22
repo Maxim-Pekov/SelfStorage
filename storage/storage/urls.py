@@ -27,5 +27,7 @@ urlpatterns = [
     path('my-rent/', views.show_user_rent, name='my-rent'),
     path('payment/<boxnumber>/', views.payment_view, name='payment'),
     path('logout/', views.logout_user, name='logout'),
+    path('login/', views.login_user, name='login'),
+    path('registration/', views.register_user, name='registration'),
 ]
 urlpatterns += static(settings.MEDIA_URL, document_root=settings.MEDIA_ROOT)

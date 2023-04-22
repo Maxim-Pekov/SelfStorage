@@ -1,0 +1,35 @@
+{% extends 'base.html' %}
+{% load static %}
+{% block title %}Storage-login{% endblock %}
+{% block content %}
+{% include 'include/navbarbox.html' %}
+
+<main class="container mt-header">
+    <div class="d-flex justify-content-center align-items-center">
+        <form class="d-flex flex-column align-items-center" style="max-width: 420px" method="post">
+            {% csrf_token %}
+            <h1 class="text-center fw-bold mb-3">Регистрация</h1>
+            
+            {{ form.username }}
+
+            {{ form.email }}
+            
+            {{ form.password1 }}
+            
+            {{ form.password2 }}
+
+            <input type="hidden" name="registration" value="">
+            
+            <span class="fw-light SelfStorage_grey">Нажимая на кнопку, вы подтверждаете свое <a href="#" class="SelfStorage_grey">согласие на обработку персональных данных</a></span>
+            <button class="btn border-8 py-3 px-5 mt-5 mb-3 w-100 text-white fs_24 SelfStorage__bg_orange SelfStorage__btn2_orange">Зарегистрироваться</button>
+            <span>Уже зарегистрированы? <a href='{% url 'login' %}' class="SelfStorage_orange" aria-label="Close">Войти в личный кабинет</a></span>
+        </form>
+
+    </div>
+    {% for field, error in form.errors.items %}
+    <div class="alert alert-danger my-3 p-1" role="alert">
+        {{ error|striptags }}
+    </div>
+    {% endfor %}
+</main>
+{% endblock %}

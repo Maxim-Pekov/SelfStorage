@@ -17,36 +17,41 @@ def logout_user(request):
     return redirect('login')
 
 
-def index(request):
-    form = CreateUserForm()
-    print(request.POST)
-
-    if request.method == 'POST' and 'EMAIL' in request.POST:
-        process_welcome_email(request)
-    if request.method == 'POST' and 'registration' in request.POST:
-        print("registration")
-        form = CreateUserForm(request.POST)
-        
-        if form.is_valid():
-            print("form is valid")
-            user = form.save()
-            login(request, user)
-            update_session_auth_hash(request, user)
-            return redirect('my-rent/')
-        else:
-            print("form is not valid")
-
-    if request.method == 'POST' and 'login' in request.POST:
+def login_user(request):
+    next_url = request.GET.get("next", '/')
+    if request.method == 'POST':
         email = request.POST.get('email')
         password = request.POST.get('password')
         user = authenticate(request, username=email, password=password)
         if user is not None:
             login(request, user)
-            return redirect('my-rent/')
+            return redirect(next_url)
         else:
             messages.info(request, 'Email or password is incorrect')
+
+    context = {}
+    return render(request, 'login.html', context)
+
+
+def register_user(request):
+    form = CreateUserForm()
+
+    if request.method == 'POST':
+        form = CreateUserForm(request.POST)
+        if form.is_valid():
+            user = form.save()
+            login(request, user)
+            update_session_auth_hash(request, user)
+            return redirect('my-rent')
+
     context = {'form': form}
-    return render(request, 'index.html', context)
+    return render(request, 'registration.html', context)
+
+
+def index(request):
+    if request.method == 'POST' and 'EMAIL' in request.POST:
+        process_welcome_email(request)
+    return render(request, 'index.html')
 
 
 def storage_view(request):

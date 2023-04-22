@@ -60,7 +60,7 @@
 				</div>
 
 				<h4 class="text-white mt-5 mb-3">Бокс от 190 р. за м²</h4>
-				<button class="btn fs_24 SelfStorage_green bg-white SelfStorage__btn_green border-8 w-50 py-3" onclick="location.href = '{% url 'storage' %}'">Подробнее</button>
+				<button class="btn fs_24 SelfStorage_green bg-white SelfStorage__btn_green border-8 w-50 py-3" onclick="location.href = '{% url 'storage' 1 %}'">Подробнее</button>
 			</div>
 		</div>
 		<div class="col-12 col-lg-6 d-flex justify-content-center justify-content-lg-start">
@@ -74,7 +74,7 @@
 					<span class="text-white">Другие идеи хранения</span>
 				</div>
 				<h4 class="text-white mt-5 mb-3">Бокс от 210 р. за м²</h4>
-				<button class="btn fs_24 SelfStorage_orange bg-white SelfStorage__btn_orange border-8 w-50 py-3" onclick="location.href = '{% url 'storage' %}'">Подробнее</button>
+				<button class="btn fs_24 SelfStorage_orange bg-white SelfStorage__btn_orange border-8 w-50 py-3" onclick="location.href = '{% url 'storage' 1 %}'">Подробнее</button>
 			</div>
 		</div>
 	</article>
@@ -140,8 +140,8 @@
 				</div>
 				<a href="#" class="text-center text-lg-start mt-4 mb-5 SelfStorage_green">Подробнее о складе</a>
 				<div class="d-flex flex-column align-items-center align-items-lg-start">
-					<button class="btn w-75 fs_24 px-5 py-3 text-white border-8 SelfStorage__bg_green SelfStorage__btn2_green mb-3">Арендовать бокс</button>
-					<button class="btn w-75 fs_24 px-5 py-3 text-white border-8 SelfStorage__bg_orange SelfStorage__btn2_orange">Выбрать склад</button>
+					<button class="btn w-75 fs_24 px-5 py-3 text-white border-8 SelfStorage__bg_green SelfStorage__btn2_green mb-3" onclick="location.href='{% url 'storage' 1 %}'">Арендовать бокс</button>
+					<button class="btn w-75 fs_24 px-5 py-3 text-white border-8 SelfStorage__bg_orange SelfStorage__btn2_orange" onclick="location.href='{% url 'storage' 1 %}'">Выбрать склад</button>
 				</div>
 			</div>
 		</div>

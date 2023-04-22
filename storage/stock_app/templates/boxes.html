@@ -26,7 +26,7 @@
 			{% for storage in storages %}
 				<li class="nav-item flex-grow-1 mx-2" role="presentation">
 				<a href="#BOX"
-				   class="row text-decoration-none py-3 px-4 mt-5 SelfStorage__boxlink" id="pills-{{ storage.slug }}-tab" data-bs-toggle="pill" data-bs-target="#pills-{{ storage.slug }}" role="tab" aria-controls="pills-{{ storage.slug }}" aria-selected="true">
+				   class="row text-decoration-none py-3 px-4 mt-5 SelfStorage__boxlink" id="pills-{{ storage.slug }}-tab" data-bs-toggle="pill" data-bs-target="#pills-{{ storage.slug }}" role="tab" aria-controls="pills-{{ storage.slug }}" aria-selected="true"  onclick="document.getElementById('toBox').click()">
 					<div class="col-12 col-lg-3 d-flex justify-content-center">
 						<img src="{{ storage.image.url }}" alt=""
 							 class="mb-3 mb-lg-0">
@@ -46,21 +46,12 @@
 				</a>
 			</li>
 			{% endfor %}
-
 		</ul>
-		<script>
-			{% for storage in storages %}
-				document.getElementById('pills-{{ storage.slug }}-tab').addEventListener('click', () => {
-					document.getElementById('toBox').click()
-				})
-			{% endfor %}
-		</script>
 	</article>
 	<article class="pt-header" id="BOX">
 		<div class="tab-content" id="boxes-content">
 			{% for storage in storages %}
-			<div class="tab-pane fade" id="pills-{{ storage.slug }}"
-				 role="tabpanel" aria-labelledby="pills-{{ storage.slug }}-tab">
+			<div class="tab-pane fade" id="pills-{{ storage.slug }}" role="tabpanel" aria-labelledby="pills-{{ storage.slug }}-tab">
 				<h1 class="text-center mb-4 fw-bold">{{ storage.title }}, {{ storage.address }}</h1>
 				<div class="row d-flex flex-column mb-5">
 					<div class="col-12 col-sm-6 col-lg-4 d-flex justify-content-between align-self-center">
@@ -121,7 +112,7 @@
 								<span class="SelfStorage_grey mb-3">Оплата за месяц</span>
 							</div>
 							<div class="d-flex flex-column align-items-center align-items-lg-start">
-								<a href="#pills-tab" role="button" class="btn w-75 fs_24 px-5 py-3 text-white border-8 SelfStorage__bg_green SelfStorage__btn2_green mb-3">Арендовать бокс</a>
+								<a href="{% url 'storage' storage.id %}#pills-tab" role="button" class="btn w-75 fs_24 px-5 py-3 text-white border-8 SelfStorage__bg_green SelfStorage__btn2_green mb-3">Арендовать бокс</a>
 								<button class="btn w-75 fs_24 px-5 py-3 text-white border-8 SelfStorage__bg_orange SelfStorage__btn2_orange">Позвонить мне</button>
 							</div>
 							<a href="#" class="text-center text-lg-start mt-4 SelfStorage_orange">Нужна помощь?</a>
@@ -185,13 +176,24 @@
 				{% for box in boxes_lower_3_square|dictsort:"price"|slice:":10" %}
 					{% include "include/box-info.html" %}
 				{% endfor %}
+				<div class="collapse" id="collapse-to3">
+					{% for box in boxes_lower_3_square|dictsort:"price"|slice:"3:" %}
+						{% include "include/box-info.html" %}
+					{% endfor %}
+				</div>
+				<div class="d-flex justify-content-center mt-5">
+					<button class="btn w-auto py-3 px-5 SelfStorage__bg_orange SelfStorage__btn2_orange text-white text-center fs_24 border-8" id="btn-collapse-to3" data-bs-toggle="collapse" data-bs-target="#collapse-to10" aria-expanded="false" aria-controls="collapse-to10">Другие боксы</button>
+					<script>
+						document.getElementById('btn-collapse-to3').addEventListener('click', () => document.getElementById('btn-collapse-to3').classList.add('d-none'))
+					</script>
+				</div>
 			</div>
 			<div class="tab-pane fade" id="pills-to10" role="tabpanel" aria-labelledby="pills-contact-tab">
-				{% for box in boxes_lower_10_square|dictsort:"price"|slice:":10" %}
+				{% for box in boxes_lower_10_square|dictsort:"price"|slice:":3" %}
 					{% include "include/box-info.html" %}
 				{% endfor %}
 				<div class="collapse" id="collapse-to10">
-					{% for box in boxes_lower_10_square|dictsort:"price"|slice:"10:" %}
+					{% for box in boxes_lower_10_square|dictsort:"price"|slice:"3:" %}
 						{% include "include/box-info.html" %}
 					{% endfor %}
 				</div>
@@ -212,9 +214,11 @@
 					{% endfor %}
 				</div>
 				<div class="d-flex justify-content-center mt-5">
-					<button class="btn w-auto py-3 px-5 SelfStorage__bg_orange SelfStorage__btn2_orange text-white text-center fs_24 border-8" id="btn-collapse-to10" data-bs-toggle="collapse" data-bs-target="#collapse-to10" aria-expanded="false" aria-controls="collapse-to10">Другие боксы</button>
+					<button
+							class="btn w-auto py-3 px-5 SelfStorage__bg_orange SelfStorage__btn2_orange text-white text-center fs_24 border-8" id="btn-collapse-to-10" data-bs-toggle="collapse" data-bs-target="#collapse-to10" aria-expanded="false" aria-controls="collapse-to10">Другие боксы</button>
 					<script>
-						document.getElementById('btn-collapse-to-10').addEventListener('click', () => document.getElementById('btn-collapse-to10').classList.add('d-none'))
+						document.getElementById('btn-collapse-to-10')
+						.addEventListener('click', () => document.getElementById('btn-collapse-to-10').classList.add('d-none'))
 					</script>
 				</div>
 			</div>

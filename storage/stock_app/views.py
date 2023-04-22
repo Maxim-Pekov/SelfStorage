@@ -16,18 +16,19 @@ def index(request):
     return render(request, 'index.html')
 
 
-def storage_view(request):
+def storage_view(request, storage):
     storages = Storage.objects.all()
-    boxes = Box.objects.calculate_box_square()
-    boxes_lower_3_square = boxes.filter(box_square__lt=3)
-    boxes_lower_10_square = boxes.filter(box_square__lt=10)
-    boxes_upper_10_square = boxes.filter(box_square__gte=10)
+    boxes = Box.objects.calculate_box_square().filter(storage__id=storage)
+    boxes_lower_3_square = boxes.filter(box_square__lt=3).filter(storage__id=storage)
+    boxes_lower_10_square = boxes.filter(box_square__lt=10).filter(storage__id=storage)
+    boxes_upper_10_square = boxes.filter(box_square__gte=10).filter(storage__id=storage)
     context = {
         'storages': storages,
         'boxes': boxes,
         'boxes_lower_3_square': boxes_lower_3_square,
         'boxes_lower_10_square': boxes_lower_10_square,
         'boxes_upper_10_square': boxes_upper_10_square,
+        'x': 'abc'
     }
     return render(request, 'boxes.html', context=context)
 

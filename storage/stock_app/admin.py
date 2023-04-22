@@ -1,10 +1,5 @@
 from django.contrib import admin
-from .models import Client, Tariff, Storage, Order, Box
-
-
-@admin.register(Client)
-class ClientAdmin(admin.ModelAdmin):
-    pass
+from .models import Tariff, Storage, Order, Box, CustomUser
 
 
 @admin.register(Tariff)
@@ -25,3 +20,8 @@ class OrderAdmin(admin.ModelAdmin):
 @admin.register(Box)
 class BoxAdmin(admin.ModelAdmin):
     pass
+
+
+@admin.register(CustomUser)
+class CustomUserAdmin(admin.ModelAdmin):
+    list_display = ['username', 'email',]

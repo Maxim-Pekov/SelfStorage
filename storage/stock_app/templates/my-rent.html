@@ -9,7 +9,7 @@
 			<button class="ps-0 btn bg-white fs_24 shadow-none SelfStorage_orange SelfStorage_tab active" id="LK-tab" data-bs-toggle="pill" data-bs-target="#LK" type="button" role="tab" aria-controls="LK" aria-selected="true">Личный кабинет</button>
 			<button class="ps-0 btn bg-white fs_24 shadow-none SelfStorage_grey SelfStorage_tab" id="Rent-tab" data-bs-toggle="pill" data-bs-target="#Rent" type="button" role="tab" aria-controls="Rent" aria-selected="false">Моя аренда</button>
 			<a href="./faq.html" class="btn fs_24 shadow-none text-decoration-none SelfStorage_grey SelfStorage_tab">FAQ</a>
-			<a href="#" class="btn fs_24 shadow-none text-decoration-none SelfStorage_grey SelfStorage_tab">Выйти</a>
+			<a href="{% url 'logout' %}" class="btn fs_24 shadow-none text-decoration-none SelfStorage_grey SelfStorage_tab">Выйти</a>
 		</div>
 		<div class="col-lg-9">
 			<div class="card tab-content p-5">

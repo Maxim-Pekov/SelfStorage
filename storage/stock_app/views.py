@@ -2,17 +2,56 @@ import uuid
 import qrcode
 
 from django.shortcuts import render
-from stock_app.models import Storage, Box, Client
+from stock_app.models import Storage, Box
 from mailapp.tasks import send_notification_mail
 from django.shortcuts import redirect
 from yookassa import Configuration, Payment
 from django.conf import settings
+from stock_app.forms import CreateUserForm
+from django.contrib.auth import authenticate, login, logout, update_session_auth_hash
+from django.contrib import messages
+from django.contrib.auth.decorators import login_required
+
+
+def logout_user(request):
+    logout(request)
+    return redirect('/')
+
+
+def login_user(request):
+    if request.method == 'POST':
+        email = request.POST.get('email')
+        password = request.POST.get('password')
+        user = authenticate(request, username=email, password=password)
+        if user is not None:
+            print('user is not None')
+            login(request, user)
+            return redirect('my-rent')
+        else:
+            messages.info(request, 'Email or password is incorrect')
+
+    context = {}
+    return render(request, 'login.html', context)
+
+
+def register_user(request):
+    form = CreateUserForm()
+
+    if request.method == 'POST':
+        form = CreateUserForm(request.POST)
+        if form.is_valid():
+            user = form.save()
+            login(request, user)
+            update_session_auth_hash(request, user)
+            return redirect('my-rent')
+
+    context = {'form': form}
+    return render(request, 'registration.html', context)
 
 
 def index(request):
     if request.method == 'POST' and 'EMAIL' in request.POST:
         process_welcome_email(request)
-
     return render(request, 'index.html')
 
 
@@ -32,7 +71,7 @@ def storage_view(request, storage):
     }
     return render(request, 'boxes.html', context=context)
 
-
+@login_required(login_url='login')
 def payment_view(request, boxnumber):
     boxes = Box.objects.get(id=boxnumber)
 
@@ -46,7 +85,7 @@ def payment_view(request, boxnumber):
         },
         "confirmation": {
             "type": "redirect",
-            "return_url": "http://80.249.146.130/my-rent/1"
+            "return_url": "http://80.249.146.130/my-rent/"
         },
         "capture": True,
         "description": f"Бокс №{boxes.title} - "
@@ -61,19 +100,16 @@ def payment_view(request, boxnumber):
 def show_faq(request):
     return render(request, 'faq.html')
 
-
-def show_user_rent(request, user_id):
-    client = Client.objects.get(id=user_id)
+@login_required(login_url='login')
+def show_user_rent(request):
     context = {
-        'client': client
+        'client': request.user,
     }
     if request.method == 'POST' and 'box_id' in request.POST:
-        process_open_box(request, client)
+        process_open_box(request)
+    if request.method == 'POST' and 'PASSWORD_EDIT' in request.POST:
+        messages.info(request, 'Not implemented yet')
     return render(request, 'my-rent.html', context)
-
-
-def show_user_rent_empty(request):
-    return render(request, 'my-rent-empty.html')
 
 
 def process_welcome_email(request):
@@ -92,9 +128,9 @@ def process_welcome_email(request):
     return "Done"
 
 
-def process_open_box(request, client):
+def process_open_box(request):
 
-    user_mail = client.email
+    user_mail = request.user.email
 
     box_id = request.POST.get('box_id')
     if not box_id:

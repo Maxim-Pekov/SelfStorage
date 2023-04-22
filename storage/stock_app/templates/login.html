@@ -1,0 +1,21 @@
+{% extends 'base.html' %}
+{% load static %}
+{% block title %}Storage-login{% endblock %}
+{% block content %}
+{% include 'include/navbarbox.html' %}
+
+<main class="container mt-header">
+<div class="d-flex justify-content-center align-items-center">
+    <form class="d-flex flex-column align-items-center" style="max-width: 420px" method="post">
+        {% csrf_token %}
+        <h1 class="text-center fw-bold mb-3">Вход</h1>
+        <input type="email" required name="email" class="form-control  border-8 mb-4 py-3 px-5 border-0 fs_24 SelfStorage__bg_lightgrey" placeholder="E-mail">
+        <input type="password" required name="password" class="form-control  border-8 mb-4 py-3 px-5 border-0 fs_24 SelfStorage__bg_lightgrey" placeholder="Пароль">
+        <input type="hidden" name="login" value="">
+        <a href="#" class="SelfStorage_orange"  aria-label="Close">Забыли пароль?</a>
+        <button class="btn border-8 py-3 px-5 mt-5 mb-3 w-100 text-white fs_24 SelfStorage__bg_orange SelfStorage__btn2_orange">Войти</button>
+        <span>Нет аккаунта?  <a href='{% url 'registration' %}' class="SelfStorage_orange" aria-label="Close">Зарегистрируйтесь на сайте</a></span>
+    </form>
+</div>
+</main>
+{% endblock %}

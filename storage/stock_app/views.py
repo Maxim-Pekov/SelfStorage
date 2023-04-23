@@ -2,7 +2,7 @@ import uuid
 import qrcode
 
 from django.shortcuts import render
-from stock_app.models import Storage, Box
+from stock_app.models import Storage, Box, Order
 from mailapp.tasks import send_notification_mail
 from django.shortcuts import redirect
 from yookassa import Configuration, Payment
@@ -11,6 +11,7 @@ from stock_app.forms import CreateUserForm
 from django.contrib.auth import authenticate, login, logout, update_session_auth_hash
 from django.contrib import messages
 from django.contrib.auth.decorators import login_required
+from django.utils import timezone
 
 
 def logout_user(request):
@@ -71,6 +72,7 @@ def storage_view(request, storage):
     }
     return render(request, 'boxes.html', context=context)
 
+
 @login_required(login_url='login')
 def payment_view(request, boxnumber):
     boxes = Box.objects.get(id=boxnumber)
@@ -100,10 +102,13 @@ def payment_view(request, boxnumber):
 def show_faq(request):
     return render(request, 'faq.html')
 
+
 @login_required(login_url='login')
 def show_user_rent(request):
+    active_orders = Order.objects.filter(client=request.user, paid_till__gte=timezone.now()).order_by('paid_till')
     context = {
         'client': request.user,
+        'active_orders': active_orders,
     }
     if request.method == 'POST' and 'box_id' in request.POST:
         process_open_box(request)

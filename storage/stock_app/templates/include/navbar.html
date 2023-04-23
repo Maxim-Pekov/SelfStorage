@@ -21,7 +21,12 @@
 					   href="{% url 'storage' 1 %}">Арендовать бокс</a>
 				</li>
 				<li class="nav-item me-5">
+					{% if user %}
+					<a class="nav-link SelfStorage_green"
+					   href='{% url 'logout' %}'>{{ user }}</a>
+					{% else %}
 					<a class="nav-link SelfStorage_green" href='{% url 'login' %}'>Войти</a>
+					{% endif %}
 				</li>
 				<li class="nav-item d-flex align-items-center">
 					<div class="d-flex justify-content-center align-items-center rounded-pill SelfStorage__bg_green me-2" style="height: 36px; width: 36px;">

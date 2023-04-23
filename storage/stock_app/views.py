@@ -78,7 +78,11 @@ def storage_view(request, storage):
 def payment_view(request, boxnumber):
     box = Box.objects.calculate_price_per_month().get(id=boxnumber)
     month_tariff = Tariff.objects.get(days=30)
-
+    order = Order.objects.create(
+        client=request.user,
+        tariff=month_tariff,
+        box=box,
+    )
     Configuration.account_id = settings.YOOKASSA_SHOP_ID
     Configuration.secret_key = settings.YOOKASSA_API_KEY
     allowed_host = settings.ALLOWED_HOSTS
@@ -90,7 +94,7 @@ def payment_view(request, boxnumber):
         },
         "confirmation": {
             "type": "redirect",
-            "return_url": f"http://{allowed_host[0]}:8000/order_status/{box.id}"
+            "return_url": f"http://{allowed_host[0]}:8000/order_status/{order.id}"
         },
         "capture": True,
         "description": f"Бокс №{box.title} - "
@@ -100,19 +104,15 @@ def payment_view(request, boxnumber):
                        f"Высота {box.height}"
     }, uuid.uuid4())
     redirect_url = payment.confirmation.confirmation_url
-    order = Order.objects.create(
-        client=request.user,
-        tariff=month_tariff,
-        box=box,
-        comment=box.title,
-        payment_id=payment.id,
-        paid_till=datetime.datetime.today() + datetime.timedelta(days=30)
-    )
+    order.comment = box.title
+    order.payment_id = payment.id
+    order.paid_till = datetime.datetime.today() + datetime.timedelta(days=30)
+    order.save()
     return redirect(redirect_url)
 
 
-def order_status_view(request, box_id: int):
-    order = Order.objects.get(client=request.user, box=box_id)
+def order_status_view(request, order_id: int):
+    order = Order.objects.get(id=order_id)
     Configuration.account_id = settings.YOOKASSA_SHOP_ID
     Configuration.secret_key = settings.YOOKASSA_API_KEY
     allowed_host = settings.ALLOWED_HOSTS
@@ -120,8 +120,8 @@ def order_status_view(request, box_id: int):
     if payment.paid:
         order.is_paid = True
         order.save()
-        return redirect(f"http://{allowed_host[0]}:8000/my-rent/")
-    return HttpResponse("Оплата не прошла")
+        return redirect(f"http://{allowed_host[0]}:80/my-rent/")
+    return render(request, 'paid-not-success.html')
 
 
 def show_faq(request):

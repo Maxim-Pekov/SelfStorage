@@ -85,7 +85,7 @@ def payment_view(request, boxnumber):
         },
         "confirmation": {
             "type": "redirect",
-            "return_url": "http://80.249.146.130/my-rent/"
+            "return_url": "http://80.249.146.130/my-rent/1"
         },
         "capture": True,
         "description": f"Бокс №{boxes.title} - "

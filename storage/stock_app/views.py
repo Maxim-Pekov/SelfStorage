@@ -51,7 +51,9 @@ def register_user(request):
 
 
 def index(request):
+
     context ={}
+
     if request.user.is_authenticated:
         context = {
             'user': request.user

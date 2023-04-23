@@ -25,7 +25,7 @@
 					<a class="nav-link SelfStorage_black" href="{% url 'faq' %}">Правила хранения</a>
 				</li>
 				<li class="nav-item me-5">
-					<a class="nav-link SelfStorage_black" href="{% url 'storage' %}">Арендовать бокс</a>
+					<a class="nav-link SelfStorage_black" href="{% url 'storage' 1 %}">Арендовать бокс</a>
 				</li>
 				{% if request.user.is_authenticated %}
 				<li class="nav-item d-flex align-items-center me-5">

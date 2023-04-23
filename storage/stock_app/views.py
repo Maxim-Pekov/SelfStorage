@@ -1,10 +1,8 @@
 import uuid
 import qrcode
-import datetime
-from django.http import HttpResponse
 
 from django.shortcuts import render
-from stock_app.models import Storage, Box, Order, Tariff
+from stock_app.models import Storage, Box, Order
 from mailapp.tasks import send_notification_mail
 from django.shortcuts import redirect
 from yookassa import Configuration, Payment
@@ -53,6 +51,9 @@ def register_user(request):
 
 
 def index(request):
+
+    context ={}
+
     if request.user.is_authenticated:
         context = {
             'user': request.user
@@ -64,7 +65,7 @@ def index(request):
 
 def storage_view(request, storage):
     storages = Storage.objects.all()
-    boxes = Box.objects.calculate_box_square().calculate_price_per_month().filter(storage__id=storage)
+    boxes = Box.objects.calculate_box_square().filter(storage__id=storage)
     boxes_lower_3_square = boxes.filter(box_square__lt=3).filter(storage__id=storage)
     boxes_lower_10_square = boxes.filter(box_square__lt=10).filter(storage__id=storage)
     boxes_upper_10_square = boxes.filter(box_square__gte=10).filter(storage__id=storage)
@@ -74,74 +75,43 @@ def storage_view(request, storage):
         'boxes_lower_3_square': boxes_lower_3_square,
         'boxes_lower_10_square': boxes_lower_10_square,
         'boxes_upper_10_square': boxes_upper_10_square,
+        'x': 'abc'
     }
     return render(request, 'boxes.html', context=context)
 
 
 @login_required(login_url='login')
 def payment_view(request, boxnumber):
-    box = Box.objects.calculate_price_per_month().get(id=boxnumber)
-    month_tariff = Tariff.objects.get(days=30)
-    order = Order.objects.create(
-        client=request.user,
-        tariff=month_tariff,
-        box=box,
-    )
+    boxes = Box.objects.get(id=boxnumber)
+
     Configuration.account_id = settings.YOOKASSA_SHOP_ID
     Configuration.secret_key = settings.YOOKASSA_API_KEY
-    allowed_host = settings.ALLOWED_HOSTS
 
     payment = Payment.create({
         "amount": {
-            "value": box.month_price,
+            "value": boxes.price,
             "currency": "RUB"
         },
         "confirmation": {
             "type": "redirect",
-            "return_url": f"http://{allowed_host[0]}:8000/order_status/{order.id}"
+            "return_url": "http://80.249.146.130/my-rent/1"
         },
         "capture": True,
-        "description": f"Бокс №{box.title} - "
-                       f"Цена {box.month_price} - "
-                       f"Длина {box.length} - "
-                       f"Ширина {box.width} - "
-                       f"Высота {box.height}"
+        "description": f"Бокс №{boxes.title} - "
+                       f"Цена {boxes.price} - "
+                       f"Длина {boxes.length} - "
+                       f"Ширина {boxes.width} - "
+                       f"Высота {boxes.height}"
     }, uuid.uuid4())
-    redirect_url = payment.confirmation.confirmation_url
-    order.comment = box.title
-    order.payment_id = payment.id
-    order.paid_till = datetime.datetime.today() + datetime.timedelta(days=30)
-    order.save()
-    return redirect(redirect_url)
-
-
-def order_status_view(request, order_id: int):
-    order = Order.objects.get(id=order_id)
-    Configuration.account_id = settings.YOOKASSA_SHOP_ID
-    Configuration.secret_key = settings.YOOKASSA_API_KEY
-    allowed_host = settings.ALLOWED_HOSTS
-    payment = Payment.find_one(order.payment_id)
-    if payment.paid:
-        order.is_paid = True
-        order.save()
-        return redirect(f"http://{allowed_host[0]}:80/my-rent/")
-    return render(request, 'paid-not-success.html')
+    return redirect(payment.confirmation.confirmation_url)
 
 
 def show_faq(request):
     return render(request, 'faq.html')
 
 
-def not_paid_view(request):
-    return render(request, 'paid-not-success.html')
-
-
 @login_required(login_url='login')
 def show_user_rent(request):
-    active_orders = Order.objects.filter(client=request.user,
-                                         paid_till__gte=timezone.now(),
-                                         is_paid=True,
-                                         ).order_by('paid_till')
     context = {
         'client': request.user,
         'active_orders': active_orders,

@@ -11,6 +11,7 @@ class CustomUser(AbstractUser):
     phone = models.IntegerField('Номер телефона', null=True, blank=True)
     first_name = models.CharField('Имя', max_length=200, null=True, blank=True)
     last_name = models.CharField('Фамилия', max_length=200, null=True, blank=True)
+    avatar_img = models.ImageField('Фото')
 
 
 class Tariff(models.Model):
@@ -44,6 +45,12 @@ class BoxQuerySet(models.QuerySet):
     def calculate_box_square(self):
         return self.annotate(
             box_square=F("length") * F("width"),
+        )
+
+    def calculate_price_per_month(self):
+        month_tariff = Tariff.objects.get(days=30)
+        return self.annotate(
+            month_price=F("length") * F("width") * month_tariff.price
         )
 
 
@@ -97,6 +104,8 @@ class Order(models.Model):
         null=True,
         verbose_name='Ячейка хранения'
     )
+    is_paid = models.BooleanField(default=False)
+    payment_id = models.CharField(max_length=200, blank=True, null=True)
     paid_till = models.DateTimeField('Оплата до', null=True)
     paid_date = models.DateTimeField('Дата оплаты', null=True, default=timezone.now)
 

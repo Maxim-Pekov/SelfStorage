@@ -1,0 +1,40 @@
+{% extends 'base.html' %}
+{% load static %}
+{% block title %}Storage-rent-empty{% endblock %}
+{% block content %}
+{% include 'include/navbarbox.html' %}
+<main class="container mt-header">
+	<div class="row" role="tablist">
+		<div class="col-lg-9">
+			<div class="card tab-content p-5">
+				<div class="tab-pane fade show active" id="LK" role="tabpanel" aria-labelledby="LK-tab">
+					<div class="row">
+						<div class="col-12 col-sm-5 d-flex flex-column align-items-center">
+							<img src="{% static 'img/image10.png' %}" class="rounded-pill mb-3" alt="">
+							<h4>{{ request.user.username }}</h4>
+						</div>
+						<div class="col-12 col-sm-7 d-flex flex-column">
+							<h1 class="fw-bold SelfStorage_green">Добрый день, {{ request.user.username }}!</h1>
+							<h4 class="SelfStorage_grey my-5">Оплата не
+								поступила:(<br>Но вы можете еще раз
+								попробовать арендовать свой	первый бокс  по
+								привлекательной цене прямо сейчас</h4>
+							<div>
+								<button class="btn fs_24 px-5 py-3 text-white border-8 SelfStorage__bg_orange SelfStorage__btn2_orange mb-3" onclick="location.href='{% url 'storage' 1 %}'">Арендовать бокс</button>
+							</div>
+							<a href="#" class="SelfStorage_orange">Нужна помощь?</a>
+						</div>
+					</div>
+				</div>
+				<div class="tab-pane fade" id="Rent" role="tabpanel" aria-labelledby="Rent-tab">
+					<h1 class="fw-bold SelfStorage_green">Добрый день, Екатерина!</h1>
+					<h4 class="SelfStorage_grey my-5">У вас еще нет аренды :(<br>Но вы можете арендовать свой первый бокс  по  привлекательной цене прямо сейчас</h4>
+					<div><button class="btn fs_24 px-5 py-3 text-white border-8 SelfStorage__bg_orange SelfStorage__btn2_orange mb-3">Арендовать бокс</button></div>
+					<a href="#" class="SelfStorage_orange">Нужна помощь?</a>
+				</div>
+			</div>
+		</div>
+	</div>
+</main>
+<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/js/bootstrap.bundle.min.js" integrity="sha384-MrcW6ZMFYlzcLA8Nl+NtUVF0sA7MsXsP1UyJoMp4YLEuNSfAP+JcXn/tWtIaxVXM" crossorigin="anonymous"></script>
+{% endblock %}

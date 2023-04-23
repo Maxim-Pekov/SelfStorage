@@ -1,6 +1,8 @@
 from django.db import models
 from django.db.models import F
 from django.contrib.auth.models import AbstractUser
+from django.utils import timezone
+from django.conf import settings
 
 
 class CustomUser(AbstractUser):
@@ -96,6 +98,10 @@ class Order(models.Model):
         verbose_name='Ячейка хранения'
     )
     paid_till = models.DateTimeField('Оплата до', null=True)
+    paid_date = models.DateTimeField('Дата оплаты', null=True, default=timezone.now)
+
+    def is_expired(self):
+        return (self.paid_till - timezone.now()).days <= settings.START_RENT_REMINDER_DAYS
 
     class Meta:
         verbose_name = 'Заказ'

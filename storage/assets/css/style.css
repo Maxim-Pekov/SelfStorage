@@ -30,7 +30,11 @@ body {
     color: #F28A4F!important;
     border-color: #F28A4F!important;
 }
-
+.SelfStorage__btn2_grey:hover {
+    background-color: white!important;
+    color: #bbb9b8!important;
+    border-color: #bbb9b8!important;
+}
 .SelfStorage__btn2_green:hover {
     background-color: white!important;
     color: #579586!important;
@@ -38,6 +42,11 @@ body {
 }
 .SelfStorage__btn_orange:hover {
     background-color: #F28A4F!important;
+    color: white!important;
+    border-color: white!important;
+}
+.SelfStorage__btn_grey:hover {
+    background-color: #bbb9b8!important;
     color: white!important;
     border-color: white!important;
 }

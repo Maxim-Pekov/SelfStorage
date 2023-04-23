@@ -51,14 +51,9 @@ def register_user(request):
 
 
 def index(request):
-    context ={}
-    if request.user.is_authenticated:
-        context = {
-            'user': request.user
-        }
     if request.method == 'POST' and 'EMAIL' in request.POST:
         process_welcome_email(request)
-    return render(request, 'index.html', context)
+    return render(request, 'index.html')
 
 
 def storage_view(request, storage):

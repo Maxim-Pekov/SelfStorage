@@ -51,6 +51,16 @@ def register_user(request):
 
 
 def index(request):
+<<<<<<< HEAD
+=======
+
+    context ={}
+
+    if request.user.is_authenticated:
+        context = {
+            'user': request.user
+        }
+>>>>>>> ed2a0b027736cc40aac1105cd692297dc8104db1
     if request.method == 'POST' and 'EMAIL' in request.POST:
         process_welcome_email(request)
     return render(request, 'index.html')

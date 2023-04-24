@@ -24,23 +24,40 @@ class CreateUserForm(UserCreationForm):
 
 
 class ChangeUserForm(UserChangeForm):
-    password1 = forms.CharField(required=False)
-    password2 = forms.CharField(required=False)
-    password = None
+    email = forms.CharField(required=True)
+    phone = forms.EmailField(required=False)
+    password = forms.CharField(required=True)
 
-    def clean(self):
-        super().clean()
-        password1 = self.cleaned_data['password1']
-        password2 = self.cleaned_data['password2']
-        if password1 and password2:
-            if password1 != password2:
-                errors = {
-                    'password2': ValidationError('The two password fields did not match.',
-                                                 code='password_mismatch')
-                }
-                raise ValidationError(errors)
-            password_validation.validate_password(password1, self.instance)
+    # def clean(self):
+    #     super().clean()
+    #     password1 = self.cleaned_data['password1']
+    #     password2 = self.cleaned_data['password2']
+    #     if password1 and password2:
+    #         if password1 != password2:
+    #             errors = {
+    #                 'password2': ValidationError('The two password fields did not match.',
+    #                                              code='password_mismatch')
+    #             }
+    #             raise ValidationError(errors)
+    #         password_validation.validate_password(password1, self.instance)
 
     class Meta:
         model = get_user_model()
-        fields = ['username', 'email', ]
+        fields = ['email', 'phone', 'password']
+
+
+class UserForm(forms.ModelForm):
+    class Meta:
+        model = CustomUser
+        fields = ('email', 'phone', 'password')
+        labels = {
+            'EMAIL': '',
+            'PHONE': '',
+            'PASSWORD': '',
+        }
+        widgets = {
+            'customer': forms.TextInput(attrs={'class': 'consultation__form_input',
+                                               'placeholder': "Введите Имя"}),
+            'phone': forms.TextInput(attrs={'class': 'consultation__form_input',
+                                            'placeholder': "+ 7 (999) 000 00 00"}),
+        }

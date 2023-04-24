@@ -21,16 +21,19 @@
 						</div>
 						<div class="col-12 col-sm-7 d-flex flex-column">
 							<form method="post">
+								{% csrf_token %}
 								<label class="fs_24 SelfStorage_green ms-2" for="EMAIL">EMAIL</label>
 								<input type="email" name="EMAIL_EDIT" id="EMAIL" class="form-control fs_24 ps-2 SelfStorage__input" value="{{ request.user.email }}" disabled>
 								<label class="fs_24 SelfStorage_green ms-2" for="PHONE">Телефон</label>
 								{% if request.user.phone %}
-									<input type="tel" name="PHONE_EDIT" id="PHONE" class="form-control fs_24 ps-2 SelfStorage__input" value="{{ request.user.phone }}" disabled>
+									<input type="tel" name="PHONE_EDIT" id="PHONE" class="form-control fs_24 ps-2 SelfStorage__input" value="{{ request.user.phone }}">
 								{% else %}
-									<input type="tel" name="PHONE_EDIT" id="PHONE" class="form-control fs_24 ps-2 SelfStorage__input" value="" disabled>
+									<input type="tel" name="PHONE_EDIT" id="PHONE" class="form-control fs_24 ps-2 SelfStorage__input" value="{{ request.user.phone }}" disabled>
 								{% endif %}
 								<label class="fs_24 SelfStorage_green ms-2" for="PASSWORD">Пароль</label>
-								<input type="password" name="PASSWORD_EDIT" id="PASSWORD" class="form-control fs_24 ps-2 SelfStorage__input" value="" disabled>
+								<input type="password" name="PASSWORD_EDIT"
+									   id="PASSWORD"
+									   class="form-control fs_24 ps-2 SelfStorage__input" value=". . ." disabled>
 								<button type="submit" class="btn SelfStorage_green ps-1" id="save" style="display: none">Сохранить</button>
 								<a class="btn SelfStorage_orange ps-1" id="edit">Редактировать</a>
 								<script>
@@ -75,7 +78,8 @@
 								<h4>{{ order.box.title }}</h4>
 								<h4 class="SelfStorage_green">Срок аренды</h4>
 								<h4>{{ order.paid_date|date:"d.m.Y" }} - {{ order.paid_till|date:"d.m.Y" }}</h4>
-								<div><button class="btn fs_24 px-5 py-3 text-white border-8 SelfStorage__bg_green SelfStorage__btn2_green mb-3">Продлить аренду</button></div>
+								<div><button
+										class="btn fs_24 px-5 py-3 text-white border-8 SelfStorage__bg_green SelfStorage__btn2_green mb-3"  onclick="location.href='{% url 'payment' order.box.id %}'">Продлить аренду</button></div>
 								{% if order.client.email %}
 									<form method="post">
 										{% csrf_token %}

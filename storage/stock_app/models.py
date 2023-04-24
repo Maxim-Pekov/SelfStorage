@@ -3,12 +3,13 @@ from django.db.models import F
 from django.contrib.auth.models import AbstractUser
 from django.utils import timezone
 from django.conf import settings
+from phonenumber_field.modelfields import PhoneNumberField
 
 
 class CustomUser(AbstractUser):
     username = models.CharField('Имя пользователя', max_length=200, unique=True)
     email = models.EmailField('Почта', unique=True)
-    phone = models.IntegerField('Номер телефона', null=True, blank=True)
+    phone = PhoneNumberField('Телефон', null=True, blank=True, db_index=True)
     first_name = models.CharField('Имя', max_length=200, null=True, blank=True)
     last_name = models.CharField('Фамилия', max_length=200, null=True, blank=True)
 

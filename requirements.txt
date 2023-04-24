@@ -7,3 +7,5 @@ redis==4.5.*
 qrcode==7.4.*
 yookassa==2.3.5
 django-celery-beat==2.5.*
+django-phonenumber-field==7.0.2
+phonenumbers==8.13.4

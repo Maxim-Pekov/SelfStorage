@@ -8,11 +8,12 @@ from mailapp.tasks import send_notification_mail
 from django.shortcuts import redirect
 from yookassa import Configuration, Payment
 from django.conf import settings
-from stock_app.forms import CreateUserForm
+from stock_app.forms import CreateUserForm, ChangeUserForm, UserForm
 from django.contrib.auth import authenticate, login, logout, update_session_auth_hash
 from django.contrib import messages
 from django.contrib.auth.decorators import login_required
 from django.utils import timezone
+from django.urls import reverse
 
 
 def logout_user(request):
@@ -82,11 +83,11 @@ def storage_view(request, storage):
 def payment_view(request, boxnumber):
     box = Box.objects.calculate_price_per_month().get(id=boxnumber)
     month_tariff = Tariff.objects.get(days=30)
-    order = Order.objects.create(
+    order = Order.objects.get_or_create(
         client=request.user,
         tariff=month_tariff,
         box=box,
-    )
+    )[0]
     Configuration.account_id = settings.YOOKASSA_SHOP_ID
     Configuration.secret_key = settings.YOOKASSA_API_KEY
     allowed_host = settings.ALLOWED_HOSTS
@@ -98,8 +99,7 @@ def payment_view(request, boxnumber):
         },
         "confirmation": {
             "type": "redirect",
-            "return_url": f"http://{allowed_host[0]}:8000/order_status"
-                          f"/{order.id}"
+            "return_url": f"http://{allowed_host[0]}:8000/order_status/{order.id}"
         },
         "capture": True,
         "description": f"Бокс №{box.title} - "
@@ -111,7 +111,10 @@ def payment_view(request, boxnumber):
     redirect_url = payment.confirmation.confirmation_url
     order.comment = box.title
     order.payment_id = payment.id
-    order.paid_till = datetime.datetime.today() + datetime.timedelta(days=30)
+    if order.paid_till:
+        order.paid_till = order.paid_till + datetime.timedelta(days=30)
+    else:
+        order.paid_till = datetime.datetime.today() + datetime.timedelta(days=30)
     order.save()
     return redirect(redirect_url)
 
@@ -147,10 +150,21 @@ def show_user_rent(request):
         'client': request.user,
         'active_orders': active_orders,
     }
+
     if request.method == 'POST' and 'box_id' in request.POST:
         process_open_box(request)
     if request.method == 'POST' and 'PASSWORD_EDIT' in request.POST:
         messages.info(request, 'Not implemented yet')
+    form = CreateUserForm()
+
+    if request.method == 'POST':
+        email = request.POST.get('EMAIL_EDIT')
+        phone = request.POST.get('PHONE_EDIT')
+        password = request.POST.get('PASSWORD_EDIT')
+        request.user.email = email
+        request.user.phone = phone
+        request.user.save()
+
     return render(request, 'my-rent.html', context)
 
 

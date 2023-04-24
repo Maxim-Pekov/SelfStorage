@@ -46,6 +46,12 @@ class BoxQuerySet(models.QuerySet):
             box_square=F("length") * F("width"),
         )
 
+    def calculate_price_per_month(self):
+        month_tariff = Tariff.objects.get(days=30)
+        return self.annotate(
+            month_price=F("length") * F("width") * month_tariff.price
+        )
+
 
 class Box(models.Model):
     title = models.CharField('Бокс', max_length=100)
@@ -97,6 +103,8 @@ class Order(models.Model):
         null=True,
         verbose_name='Ячейка хранения'
     )
+    is_paid = models.BooleanField(default=False)
+    payment_id = models.CharField(max_length=200, blank=True, null=True)
     paid_till = models.DateTimeField('Оплата до', null=True)
     paid_date = models.DateTimeField('Дата оплаты', null=True, default=timezone.now)
 

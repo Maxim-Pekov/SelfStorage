@@ -172,7 +172,7 @@
 				</div>
 			</div>
 			<div class="tab-pane fade" id="pills-to3" role="tabpanel" aria-labelledby="pills-profile-tab">
-				{% for box in boxes_lower_3_square|dictsort:"price"|slice:":10" %}
+				{% for box in boxes_lower_3_square|dictsort:"price"|slice:":3" %}
 					{% include "include/box-info.html" %}
 				{% endfor %}
 				<div class="collapse" id="collapse-to3">

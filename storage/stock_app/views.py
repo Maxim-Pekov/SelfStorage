@@ -105,6 +105,9 @@ def show_faq(request):
 
 @login_required(login_url='login')
 def show_user_rent(request):
+
+    active_orders = Order.objects.filter(client=request.user, paid_till__gte=timezone.now()).order_by('paid_till')
+
     context = {
         'client': request.user,
         'active_orders': active_orders,
